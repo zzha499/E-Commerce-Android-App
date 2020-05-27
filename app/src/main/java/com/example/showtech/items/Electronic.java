@@ -1,16 +1,21 @@
 package com.example.showtech.items;
 
+import android.media.Image;
+
 import com.example.showtech.DetailsActivity;
 
-public class Electronics {
+import java.util.ArrayList;
+
+public class Electronic {
 
     private String names;
     private Float price;
     private String description;
     private String specification;
     private DetailsActivity details;
+    private ArrayList<Image> images;
 
-    public Electronics() {
+    public Electronic() {
     }
 
 
@@ -55,5 +60,13 @@ public class Electronics {
 
     public void setDetails(DetailsActivity details) {
         this.details = details;
+    }
+
+    public ArrayList<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(ArrayList<Image> images) {
+        this.images = images;
     }
 }
