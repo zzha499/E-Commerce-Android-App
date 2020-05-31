@@ -118,3 +118,6 @@ gradlew
 gradlew.bat
 settings.gradle
 .idea/
+
+## Item images
+app/src/main/res/drawable-hdpi/
