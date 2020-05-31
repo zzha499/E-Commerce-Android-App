@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">ShowTech</string>
+    <string name="computer">Computer</string>
+    <string name="mobile_phone">Mobile Phone</string>
+    <string name="music">Music</string>
+    <string name="camera">Camera</string>
+    <string name="Gaming">Gaming</string>
+    <string name="Top_selling">Top Selling</string>
+    <string name="categories">Categories</string>
+    <string name="back">Back</string>
+    <string name="item_image">Item Image</string>
+    <string name="place_holder">PLACE HOLDER</string>
 </resources>

@@ -1,6 +1,5 @@
 package com.example.showtech.items;
 
-import android.media.Image;
 
 import com.example.showtech.DetailsActivity;
 
@@ -8,12 +7,12 @@ import java.util.ArrayList;
 
 public class Electronic {
 
-    private String names;
+    private String name;
     private Float price;
     private String description;
     private String specification;
     private DetailsActivity details;
-    private ArrayList<Image> images;
+    private ArrayList<Integer> images;
 
     public Electronic() {
     }
@@ -22,12 +21,12 @@ public class Electronic {
 
 
 
-    public String getNames() {
-        return names;
+    public String getName() {
+        return name;
     }
 
-    public void setNames(String names) {
-        this.names = names;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Float getPrice() {
@@ -62,11 +61,11 @@ public class Electronic {
         this.details = details;
     }
 
-    public ArrayList<Image> getImages() {
+    public ArrayList<Integer> getImages() {
         return images;
     }
 
-    public void setImages(ArrayList<Image> images) {
+    public void setImages(ArrayList<Integer> images) {
         this.images = images;
     }
 }

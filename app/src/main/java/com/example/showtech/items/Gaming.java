@@ -1,4 +1,4 @@
 package com.example.showtech.items;
 
-public class Gaming extends Electronics {
+public class Gaming extends Electronic {
 }

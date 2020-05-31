@@ -1,4 +1,4 @@
 package com.example.showtech.items;
 
-public class Music extends Electronics {
+public class Music extends Electronic {
 }

@@ -5,11 +5,27 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.media.Image;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.example.showtech.items.Electronic;
 
 public class DetailsActivity extends AppCompatActivity implements Activity{
+
+    @Override
+    public void back(View view) {
+        finish();
+    }
+
+    @Override
+    public ListActivity search(String searchInput) {
+        return null;
+    }
+
+    @Override
+    public void quitApplication() {
+
+    }
 
     class ViewHolder {
         ViewPager imageSlider;
@@ -28,13 +44,13 @@ public class DetailsActivity extends AppCompatActivity implements Activity{
     }
 
 
-    public void loadImages() {
-        for (Image image : item.getImages()) {
-            ImageView imageView = new ImageView(this);
-            vh.imageSlider.addView(imageView);
-        }
-
-
-    }
+//    public void loadImages() {
+//        for (Image image : item.getImages()) {
+//            ImageView imageView = new ImageView(this);
+//            vh.imageSlider.addView(imageView);
+//        }
+//
+//
+//    }
 
 }
