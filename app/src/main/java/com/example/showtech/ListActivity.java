@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.showtech.items.Electronic;
 import com.example.showtech.utils.DataProvider;
@@ -17,7 +18,10 @@ import com.example.showtech.utils.ListAdapter;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class ListActivity extends AppCompatActivity  implements Activity{
+public class ListActivity extends AppCompatActivity  implements Activity, ListAdapter.ItemClickListener {
+
+
+    public static final String ITEM = "com.example.showtech.ITEM";
 
     static class ViewHolder {
         RecyclerView list_of_items;
@@ -26,7 +30,7 @@ public class ListActivity extends AppCompatActivity  implements Activity{
     }
 
     private ViewHolder vh;
-    private static RecyclerView.Adapter adapter;
+    private static ListAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Electronic> items;
     private DataProvider dataProvider;
@@ -53,10 +57,19 @@ public class ListActivity extends AppCompatActivity  implements Activity{
         dataProvider = new DataProvider(this);
         items = dataProvider.provideData(category);
         adapter = new ListAdapter(items);
+        adapter.setClickListener(this);
         vh.list_of_items.setAdapter(adapter);
 
     }
 
+    @Override
+    public void onItemClick(View view, int position) {
+        Electronic item = adapter.getItem(position);
+        Toast.makeText(view.getContext(), item.getName(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, DetailsActivity.class);
+        intent.putExtra(ITEM, item);
+        startActivity(intent);
+    }
 
     @Override
     public void back(View view) {

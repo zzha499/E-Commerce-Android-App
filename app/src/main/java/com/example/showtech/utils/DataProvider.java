@@ -4,58 +4,78 @@ import android.content.Context;
 import com.example.showtech.items.Electronic;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Map;
 
 public class DataProvider {
 
     private Context context;
 
-    public static class computer{
-        static String[] names = {"Alien", "Mac", "Hp", "Lenovo","Acer", "Asus", "Dell", "MackBook Pro","MacBook Air", "iPad Pro"};
-        static String[][] descriptions = {{"The Alien gaming computer", ""}, {"The Mac computer", ""}, {"The Hp computer", ""}, {"The Lenovo computer", ""},
-                                            {"The Acer computer", ""}, {"The Asus computer", ""}, {"The Dell computer", ""}, {"The MackBook Pro", ""}, {"The MacBook Air", ""}, {"The iPad Pro", ""}};
+    public static class electronicData {
+        static String[][] computers = {
+                {"Alien", "100", "alien_computer", "The Alien gaming computer"},
+                {"Mac", "2000", "mac_computer", "The Mac computer"},
+                {"Hp", "2000", "hp_computer", "The Hp computer"},
+                {"Lenovo", "300", "lenovo_computer", "The Lenovo computer"},
+                {"Acer", "100", "acer_1_computer", "The Alien gaming computer"},
+                {"Asus", "2000", "asus_rog_1_computer", "The Mac computer"},
+                {"Dell", "2000", "xps_1", "The Hp computer"},
+                {"MacBook Pro", "300", "mbp_16_1", "The Lenovo computer"},
+                {"MacBook Air", "300", "mb_air_2", "The Lenovo computer"},
+                {"iPad Pro 2020", "100", "ipad_pro_1", "The Alien gaming computer"}
+        };
 
-        static String[] prices = {"3000", "2000", "200", "300","100","100","100","100","100","100"};
-        static String[] imageIDs = {"alien_computer", "mac_computer", "hp_computer", "lenovo_computer","acer_1_computer","asus_rog_1_computer","xps_1","mbp_16_1","mb_air_2","ipad_pro_1"};
-    }
+        static String[][] mobile_phone = {
+                {"iPhone SE", "100", "iphone_se_1", "The Alien gaming computer"},
+                {"iPhone 11", "2000", "iphone_11_1", "The Mac computer"},
+                {"iPhone 11 Pro", "2000", "iphone_11_p_1", "The Hp computer"},
+                {"Huawei Mate 30", "300", "mate30_1", "The Lenovo computer"},
+                {"Huawei Mate Xs", "100", "matexs_1", "The Alien gaming computer"},
+                {"Xiaomi Mi 10", "2000", "mi_10_1", "The Mac computer"},
+                {"OnePlus 8 Pro", "2000", "oneplus_8_1", "The Hp computer"},
+                {"Huawei P40 Pro", "300", "p40_1", "The Lenovo computer"},
+                {"Samsung S20", "300", "s20_1", "The Lenovo computer"},
+                {"Oppor Find X2", "100", "findx2_2", "The Alien gaming computer"}
+        };
 
+        static String[][] music = {
+                {"Beats Wireless Solo", "100", "beats_solo_1", "The Alien gaming computer"},
+                {"Bose Noise Cancelling", "2000", "bose_1", "The Mac computer"},
+                {"AirPods Pro", "2000", "airpods_pro_1", "The Hp computer"},
+                {"Sennheiser", "300", "sennheiser_1", "The Lenovo computer"},
+                {"Sennheiser CX", "100", "sennheiser_cx_1", "The Alien gaming computer"},
+                {"Sonos Speaker", "2000", "sonos_subgen3_1", "The Mac computer"},
+                {"Sony Headphone", "2000", "sony_wh1000xm3_1", "The Hp computer"},
+                {"Panasonic Headphone", "300", "panasonic_sc_1", "The Lenovo computer"},
+                {"JBL Headphone", "300", "jbl_head_1", "The Lenovo computer"},
+                {"JBL Pulse-4", "100", "jbl_pulse4_1", "The Alien gaming computer"}
+        };
 
+        static String[][] camera = {
+                {"Canon Camera", "100", "canon_eos_1500d", "The Alien gaming computer"},
+                {"Canon lens", "2000", "canon_efs_250mm", "The Mac computer"},
+                {"Canon PowerShot", "2000", "canon_powershot_g7x", "The Hp computer"},
+                {"Joby-GorillaPod", "300", "joby_gorillapod", "The Lenovo computer"},
+                {"DJI-Ronin-S", "100", "dji_ronin_s", "The Alien gaming computer"},
+                {"Nikon", "2000", "nikon_af_50mm", "The Mac computer"},
+                {"Nikon-D3500", "2000", "nikon_d3500", "The Hp computer"},
+                {"Olympus-OM-D", "300", "olympus_om_d", "The Lenovo computer"},
+                {"Sony-WX800b", "300", "sony_wx800b", "The Lenovo computer"},
+                {"GoPro-Max360", "100", "gopro_max360", "The Alien gaming computer"}
+        };
 
-    public static class Mobile_phone{
-        static String[] names = {"iPhone SE", "iPhone 11", "iPhone 11 Pro", "Huawei Mate 30","Huawei Mate XS", "Xiaomi Mi 10", "OnePlus 8 Pro", "Huawei P40 Pro","Samsung S20", "Oppo Find X2"};
-        static String[][] descriptions = {{"This is", ""}, {"This is", ""}, {"This is", ""}, {"This is", ""},
-                {"This is", ""}, {"This is", ""}, {"This is", ""}, {"This is", ""}, {"This is", ""}, {"This is", ""}};
-
-        static String[] prices = {"3000", "2000", "200", "300","100","100","100","100","100","100"};
-        static String[] imageIDs = {"iphone_se_1", "iphone_11_1", "iphone_11_p_1", "mate30_1","matexs_1","mi_10_1","oneplus_8_1","p40_1","s20_1","findx2_2"};
-    }
-
-
-
-    public static class Gaming{
-        static String[] names = {"Alien", "Mac", "Hp", "Lenovo","Acer", "Asus", "Dell", "MackBook Pro","MacBook Air", "iPad Pro"};
-        static String[][] descriptions = {{"The Alien gaming computer", ""}, {"The Mac computer", ""}, {"The Hp computer", ""}, {"The Lenovo computer", ""},
-                {"The Acer computer", ""}, {"The Asus computer", ""}, {"The Dell computer", ""}, {"The MackBook Pro", ""}, {"The MacBook Air", ""}, {"The iPad Pro", ""}};
-
-        static String[] prices = {"3000", "2000", "200", "300","100","100","100","100","100","100"};
-        static String[] imageIDs = {"xbox_1", "switch_1", "ps4_1", "ps_vr_1","ps_move_1","ps4pro_1","spongebob_1","switch_lite_1","starwar_1","avengers_1"};
-    }
-
-    public static class Music{
-        static String[] names = {"Alien", "Mac", "Hp", "Lenovo","Acer", "Asus", "Dell", "MackBook Pro","MacBook Air", "iPad Pro"};
-        static String[][] descriptions = {{"The Alien gaming computer", ""}, {"The Mac computer", ""}, {"The Hp computer", ""}, {"The Lenovo computer", ""},
-                {"The Acer computer", ""}, {"The Asus computer", ""}, {"The Dell computer", ""}, {"The MackBook Pro", ""}, {"The MacBook Air", ""}, {"The iPad Pro", ""}};
-
-        static String[] prices = {"3000", "2000", "200", "300","100","100","100","100","100","100"};
-        static String[] imageIDs = {"beats_solo_1", "bose_1", "airpods_pro_1", "sennheiser_1","sennheiser_cx_1","sonos_subgen3_1","sony_wh1000xm3_1","panasonic_sc_1","jbl_head_1","jbl_pulse4_1"};
-    }
-
-    public static class Camera{
-        static String[] names = {"Alien", "Mac", "Hp", "Lenovo","Acer", "Asus", "Dell", "MackBook Pro","MacBook Air", "iPad Pro"};
-        static String[][] descriptions = {{"The Alien gaming computer", ""}, {"The Mac computer", ""}, {"The Hp computer", ""}, {"The Lenovo computer", ""},
-                {"The Acer computer", ""}, {"The Asus computer", ""}, {"The Dell computer", ""}, {"The MackBook Pro", ""}, {"The MacBook Air", ""}, {"The iPad Pro", ""}};
-
-        static String[] prices = {"3000", "2000", "200", "300","100","100","100","100","100","100"};
-        static String[] imageIDs = {"canon_eos_1500d", "canon_efs_250mm", "canon_powershot_g7x", "","joby_gorillapod","dji_ronin_s","nikon_af_50mm","nikon_d3500","olympus_om_d","mb_air_2","ipad_pro_1"};
+        static String[][] gaming = {
+                {"Xbox One", "100", "xbox_1", "The Alien gaming computer"},
+                {"Nintendo Switch", "2000", "switch_1", "The Mac computer"},
+                {"PS4", "2000", "ps4_1", "The Hp computer"},
+                {"PlayStation VR", "300", "ps_vr_1", "The Lenovo computer"},
+                {"PlayStation Move", "100", "ps_move_1", "The Alien gaming computer"},
+                {"PS4 Pro", "2000", "ps4pro_1", "The Mac computer"},
+                {"SpongeBob Game", "2000", "spongebob_1", "The Hp computer"},
+                {"Nintendo Switch", "300", "switch_lite_1", "The Lenovo computer"},
+                {"StarWar Game", "300", "starwar_1", "The Lenovo computer"},
+                {"Avengers Game", "100", "avengers_1", "The Alien gaming computer"}
+        };
     }
 
     public DataProvider(Context context){
@@ -65,22 +85,45 @@ public class DataProvider {
 
     public ArrayList<Electronic> provideData(String category){
         ArrayList<Electronic> items = new ArrayList<>();
+        String[][] data = {};
+        switch (category.toLowerCase()) {
+            case "computer":
+                data = electronicData.computers;
+                break;
+            case "mobile_phone":
+                data = electronicData.mobile_phone;
+                break;
+            case "music":
+                data = electronicData.music;
+                break;
+            case "camera":
+                data = electronicData.camera;
+                break;
+            case "gaming":
+                data = electronicData.gaming;
+                break;
+            case "top selling":
+                data = electronicData.computers;
+                break;
+        }
 
-        for (int i = 0; i < computer.names.length; i++) {
+        for (String[] d : data) {
             Electronic item = new Electronic();
-            item.setName(computer.names[i]);
-            item.setPrice(Float.parseFloat(computer.prices[i]));
-            item.setDescription("$" + computer.prices[i] + " \n" + computer.descriptions[i][0]);
+            item.setName(d[0]);
+            item.setPrice(Float.parseFloat(d[1]));
             ArrayList<Integer> images = new ArrayList<>();
-            int id = context.getResources().getIdentifier(computer.imageIDs[i], "drawable", context.getPackageName());
-            images.add(id);
+            String[] imagesIDs = d[2].split(" ");
+            for (String s : imagesIDs) {
+                int id = context.getResources().getIdentifier(s, "drawable", context.getPackageName());
+                images.add(id);
+            }
             item.setImages(images);
+            item.setDescription(d[3]);
+
             items.add(item);
         }
 
         return items;
-
-
     }
 
 }

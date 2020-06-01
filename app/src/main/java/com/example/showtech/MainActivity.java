@@ -9,17 +9,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.showtech.items.Electronic;
 import com.example.showtech.utils.DataProvider;
-import com.example.showtech.utils.TopSellingListAdapter;
+import com.example.showtech.utils.ListAdapter;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity  implements Activity{
+public class MainActivity extends AppCompatActivity  implements Activity, ListAdapter.ItemClickListener {
 
     public final static String EXTRA_MESSAGE = "com.example.showtech.MESSAGE";
+    private static final String ITEM = "com.example.showtech.ITEM";
 
     static class ViewHolder {
         RecyclerView top_selling;
@@ -28,7 +30,7 @@ public class MainActivity extends AppCompatActivity  implements Activity{
     }
 
     private ViewHolder vh;
-    private static RecyclerView.Adapter adapter;
+    private static ListAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Electronic> items;
     private DataProvider dataProvider;
@@ -54,8 +56,9 @@ public class MainActivity extends AppCompatActivity  implements Activity{
         vh.top_selling.setItemAnimator(new DefaultItemAnimator());
 
         dataProvider = new DataProvider(this);
-        items = dataProvider.provideData("top_selling");
-        adapter = new TopSellingListAdapter(items);
+        items = dataProvider.provideData("top selling");
+        adapter = new ListAdapter(items);
+        adapter.setClickListener(this);
         vh.top_selling.setAdapter(adapter);
 
 
@@ -63,9 +66,19 @@ public class MainActivity extends AppCompatActivity  implements Activity{
     }
 
     public void selectCategory(View view){
-        Intent intent = new Intent(this, ListActivity.class);
         String message = view.getContentDescription().toString();
+        Toast.makeText(view.getContext(), message, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, ListActivity.class);
         intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        Electronic item = adapter.getItem(position);
+        Toast.makeText(view.getContext(), item.getName(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, DetailsActivity.class);
+        intent.putExtra(ITEM, item);
         startActivity(intent);
     }
 
