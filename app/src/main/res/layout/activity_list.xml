@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:padding="15dp"
-                android:text="@string/computer"
+                android:text="@string/place_holder"
                 android:textColor="@color/White"
                 android:textSize="36sp"
                 android:textStyle="bold" />
@@ -45,6 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="15dp"
+            android:contentDescription="@string/list_of_items"
             android:paddingHorizontal="20dp"
             android:paddingVertical="20dp"
             android:scrollbars="vertical"

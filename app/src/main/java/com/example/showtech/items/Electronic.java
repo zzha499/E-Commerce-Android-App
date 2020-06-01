@@ -3,9 +3,10 @@ package com.example.showtech.items;
 
 import com.example.showtech.DetailsActivity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Electronic {
+public class Electronic implements Serializable {
 
     private String name;
     private Float price;
@@ -16,10 +17,6 @@ public class Electronic {
 
     public Electronic() {
     }
-
-
-
-
 
     public String getName() {
         return name;

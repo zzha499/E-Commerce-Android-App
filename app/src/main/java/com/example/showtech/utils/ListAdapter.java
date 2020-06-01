@@ -18,16 +18,25 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
 
 
     private ArrayList<Electronic> items;
+    private ItemClickListener itemClickListener;
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView imageView;
         TextView name;
+        TextView price;
         TextView description;
-        public MyViewHolder(View itemView) {
+        MyViewHolder(View itemView) {
             super(itemView);
             this.imageView = (ImageView) itemView.findViewById(R.id.imageView);
             this.name = (TextView) itemView.findViewById(R.id.name);
+            this.price = (TextView) itemView.findViewById(R.id.price);
             this.description = (TextView) itemView.findViewById(R.id.description);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (itemClickListener != null) itemClickListener.onItemClick(view, getAdapterPosition());
         }
     }
     public ListAdapter(ArrayList<Electronic> items) {
@@ -37,8 +46,15 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
     @NonNull
     @Override
     public ListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_of_items, parent, false);
+        View view;
+        if (parent.getContentDescription().equals("Top Selling")) {
+            view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.top_selling_items, parent, false);
+        }
+        else {
+            view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.list_of_items, parent, false);
+        }
         return new MyViewHolder(view);
     }
 
@@ -46,10 +62,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
     public void onBindViewHolder(MyViewHolder holder, int position) {
         ImageView imageView = holder.imageView;
         TextView name = holder.name;
+        TextView price = holder.price;
         TextView description = holder.description;
 
         imageView.setImageResource(items.get(position).getImages().get(0));
         name.setText(items.get(position).getName());
+        String displayedPrice = "$ " + items.get(position).getPrice().toString();
+        price.setText(displayedPrice);
         description.setText(items.get(position).getDescription());
 
     }
@@ -57,5 +76,17 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
     @Override
     public int getItemCount() {
         return items.size();
+    }
+
+    public Electronic getItem(int id) {
+        return items.get(id);
+    }
+
+    public void setClickListener(ItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
+    }
+
+    public interface ItemClickListener {
+        void onItemClick(View view, int position);
     }
 }
