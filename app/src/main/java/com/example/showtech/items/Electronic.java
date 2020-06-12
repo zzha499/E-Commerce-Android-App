@@ -13,9 +13,10 @@ public class Electronic implements Serializable {
     private String description;
     private String specification;
     private DetailsActivity details;
-    private ArrayList<Integer> images;
+    private int[] images;
 
     public Electronic() {
+        specification = "";
     }
 
     public String getName() {
@@ -58,11 +59,15 @@ public class Electronic implements Serializable {
         this.details = details;
     }
 
-    public ArrayList<Integer> getImages() {
+    public int[] getImages() {
         return images;
     }
 
     public void setImages(ArrayList<Integer> images) {
-        this.images = images;
+        this.images = new int[images.size()];
+
+        for (int i = 0; i < images.size(); i++) {
+            this.images[i] = images.get(i);
+        }
     }
 }

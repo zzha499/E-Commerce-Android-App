@@ -4,8 +4,6 @@ import android.content.Context;
 import com.example.showtech.items.Electronic;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Map;
 
 public class DataProvider {
 
@@ -17,8 +15,8 @@ public class DataProvider {
                 {"Mac", "2000", "mac_computer", "The Mac computer"},
                 {"Hp", "2000", "hp_computer", "The Hp computer"},
                 {"Lenovo", "300", "lenovo_computer", "The Lenovo computer"},
-                {"Acer", "100", "acer_1_computer", "The Alien gaming computer"},
-                {"Asus", "2000", "asus_rog_1_computer", "The Mac computer"},
+                {"Acer", "100", "acer_1 acer_2 acer_3", "The Alien gaming computer"},
+                {"Asus", "2000", "asus_rog_1", "The Mac computer"},
                 {"Dell", "2000", "xps_1", "The Hp computer"},
                 {"MacBook Pro", "300", "mbp_16_1", "The Lenovo computer"},
                 {"MacBook Air", "300", "mb_air_2", "The Lenovo computer"},
@@ -27,11 +25,11 @@ public class DataProvider {
 
         static String[][] mobile_phone = {
                 {"iPhone SE", "100", "iphone_se_1", "The Alien gaming computer"},
-                {"iPhone 11", "2000", "iphone_11_1", "The Mac computer"},
-                {"iPhone 11 Pro", "2000", "iphone_11_p_1", "The Hp computer"},
+                {"iPhone 11", "2000", "iphone11_1", "The Mac computer"},
+                {"iPhone 11 Pro", "2000", "iphone11p_1", "The Hp computer"},
                 {"Huawei Mate 30", "300", "mate30_1", "The Lenovo computer"},
                 {"Huawei Mate Xs", "100", "matexs_1", "The Alien gaming computer"},
-                {"Xiaomi Mi 10", "2000", "mi_10_1", "The Mac computer"},
+                {"Xiaomi Mi 10", "2000", "mi10_1", "The Mac computer"},
                 {"OnePlus 8 Pro", "2000", "oneplus_8_1", "The Hp computer"},
                 {"Huawei P40 Pro", "300", "p40_1", "The Lenovo computer"},
                 {"Samsung S20", "300", "s20_1", "The Lenovo computer"},
@@ -41,12 +39,12 @@ public class DataProvider {
         static String[][] music = {
                 {"Beats Wireless Solo", "100", "beats_solo_1", "The Alien gaming computer"},
                 {"Bose Noise Cancelling", "2000", "bose_1", "The Mac computer"},
-                {"AirPods Pro", "2000", "airpods_pro_1", "The Hp computer"},
+                {"AirPods Pro", "2000", "airpodspro_1", "The Hp computer"},
                 {"Sennheiser", "300", "sennheiser_1", "The Lenovo computer"},
                 {"Sennheiser CX", "100", "sennheiser_cx_1", "The Alien gaming computer"},
                 {"Sonos Speaker", "2000", "sonos_subgen3_1", "The Mac computer"},
                 {"Sony Headphone", "2000", "sony_wh1000xm3_1", "The Hp computer"},
-                {"Panasonic Headphone", "300", "panasonic_sc_1", "The Lenovo computer"},
+                {"Panasonic Headphone", "300", "panasonicsc_1", "The Lenovo computer"},
                 {"JBL Headphone", "300", "jbl_head_1", "The Lenovo computer"},
                 {"JBL Pulse-4", "100", "jbl_pulse4_1", "The Alien gaming computer"}
         };
@@ -54,7 +52,7 @@ public class DataProvider {
         static String[][] camera = {
                 {"Canon Camera", "100", "canon_eos_1500d", "The Alien gaming computer"},
                 {"Canon lens", "2000", "canon_efs_250mm", "The Mac computer"},
-                {"Canon PowerShot", "2000", "canon_powershot_g7x", "The Hp computer"},
+                {"Canon PowerShot", "2000", "canon_powershot_g7x_iii", "The Hp computer"},
                 {"Joby-GorillaPod", "300", "joby_gorillapod", "The Lenovo computer"},
                 {"DJI-Ronin-S", "100", "dji_ronin_s", "The Alien gaming computer"},
                 {"Nikon", "2000", "nikon_af_50mm", "The Mac computer"},
@@ -90,7 +88,7 @@ public class DataProvider {
             case "computer":
                 data = electronicData.computers;
                 break;
-            case "mobile_phone":
+            case "mobile phone":
                 data = electronicData.mobile_phone;
                 break;
             case "music":
@@ -103,7 +101,10 @@ public class DataProvider {
                 data = electronicData.gaming;
                 break;
             case "top selling":
-                data = electronicData.computers;
+                data = combine(electronicData.mobile_phone, electronicData.computers);
+                break;
+            case "all":
+                data = combine(combine(combine(combine(electronicData.computers, electronicData.mobile_phone), electronicData.music), electronicData.camera), electronicData.gaming);
                 break;
         }
 
@@ -124,6 +125,14 @@ public class DataProvider {
         }
 
         return items;
+    }
+
+    private static String[][] combine(String[][] a, String[][] b){
+        int length = a.length + b.length;
+        String[][] result = new String[length][];
+        System.arraycopy(a, 0, result, 0, a.length);
+        System.arraycopy(b, 0, result, a.length, b.length);
+        return result;
     }
 
 }

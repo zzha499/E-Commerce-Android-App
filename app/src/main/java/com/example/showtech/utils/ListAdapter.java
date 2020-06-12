@@ -1,8 +1,11 @@
 package com.example.showtech.utils;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,11 +17,13 @@ import com.example.showtech.items.Electronic;
 
 import java.util.ArrayList;
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> {
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> implements Filterable {
 
 
     private ArrayList<Electronic> items;
+    private ArrayList<Electronic> filteredItems;
     private ItemClickListener itemClickListener;
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView imageView;
@@ -38,9 +43,19 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         public void onClick(View view) {
             if (itemClickListener != null) itemClickListener.onItemClick(view, getAdapterPosition());
         }
+
+        void bind(Electronic item) {
+            imageView.setImageResource(item.getImages()[0]);
+            name.setText(item.getName());
+            String displayedPrice = "$ " + item.getPrice().toString();
+            price.setText(displayedPrice);
+            description.setText(item.getDescription());
+        }
     }
+
     public ListAdapter(ArrayList<Electronic> items) {
         this.items = items;
+        this.filteredItems = items;
     }
 
     @NonNull
@@ -60,26 +75,16 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        ImageView imageView = holder.imageView;
-        TextView name = holder.name;
-        TextView price = holder.price;
-        TextView description = holder.description;
-
-        imageView.setImageResource(items.get(position).getImages().get(0));
-        name.setText(items.get(position).getName());
-        String displayedPrice = "$ " + items.get(position).getPrice().toString();
-        price.setText(displayedPrice);
-        description.setText(items.get(position).getDescription());
-
+        holder.bind(filteredItems.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return filteredItems.size();
     }
 
     public Electronic getItem(int id) {
-        return items.get(id);
+        return filteredItems.get(id);
     }
 
     public void setClickListener(ItemClickListener itemClickListener) {
@@ -88,5 +93,36 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
 
     public interface ItemClickListener {
         void onItemClick(View view, int position);
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charString = charSequence.toString();
+                if (charString.isEmpty()) {
+                    filteredItems = items;
+                } else {
+                    ArrayList<Electronic> filteredList = new ArrayList<>();
+                    for (Electronic item : items) {
+                        if (item.getName().toLowerCase().contains(charString.toLowerCase()) ||
+                                item.getDescription().toLowerCase().contains(charString.toLowerCase()) ||
+                                item.getSpecification().toLowerCase().contains(charString.toLowerCase())) {
+                            filteredList.add(item);
+                        }
+                    }
+                    filteredItems = filteredList;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filteredItems;
+                return filterResults;
+            }
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                filteredItems = (ArrayList<Electronic>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 }

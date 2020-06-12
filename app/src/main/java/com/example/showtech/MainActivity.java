@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity  implements Activity, ListAd
     static class ViewHolder {
         RecyclerView top_selling;
         LinearLayout computer, mobile_phone, music, camera, gaming;
+        ImageView search;
 
     }
 
@@ -48,6 +51,7 @@ public class MainActivity extends AppCompatActivity  implements Activity, ListAd
         vh.music = (LinearLayout) findViewById(R.id.music);
         vh.camera = (LinearLayout) findViewById(R.id.camera);
         vh.gaming = (LinearLayout) findViewById(R.id.gaming);
+        vh.search = (ImageView) findViewById(R.id.search);
 
         vh.top_selling = (RecyclerView) findViewById(R.id.top_selling);
         vh.top_selling.setHasFixedSize(true);
@@ -60,8 +64,6 @@ public class MainActivity extends AppCompatActivity  implements Activity, ListAd
         adapter = new ListAdapter(items);
         adapter.setClickListener(this);
         vh.top_selling.setAdapter(adapter);
-
-
 
     }
 
@@ -86,9 +88,9 @@ public class MainActivity extends AppCompatActivity  implements Activity, ListAd
     public void back(View view) {
     }
 
-    @Override
-    public ListActivity search(String searchInput) {
-        return null;
+    public void search(View view) {
+        Intent intent = new Intent(this, SearchActivity.class);
+        startActivity(intent);
     }
 
     @Override

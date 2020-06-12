@@ -27,15 +27,31 @@
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/showtech_logo" />
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp"
-            android:text="@string/Top_selling"
-            android:textColor="#E0E0E0"
-            android:textSize="24sp"
-            android:textStyle="bold|italic" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:text="@string/Top_selling"
+                android:textColor="#E0E0E0"
+                android:textSize="24sp"
+                android:textStyle="bold|italic" android:layout_width="0dp"/>
+
+            <ImageView
+                android:id="@+id/search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:contentDescription="@string/search"
+                android:onClick="search"
+                app:srcCompat="@android:drawable/ic_menu_search" />
+
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/top_selling"
@@ -175,7 +191,7 @@
                 android:layout_marginBottom="3dp"
                 android:background="@color/DarkGrey"
                 android:clickable="true"
-                android:contentDescription="@string/music"
+                android:contentDescription="@string/camera"
                 android:onClick="selectCategory"
                 android:orientation="horizontal">
 

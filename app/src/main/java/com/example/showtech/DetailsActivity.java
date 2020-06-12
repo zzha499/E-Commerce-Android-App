@@ -1,6 +1,7 @@
 package com.example.showtech;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,12 +10,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.showtech.items.Electronic;
+import com.example.showtech.utils.ImageSliderAdapter;
 
 import java.util.Objects;
 
 public class DetailsActivity extends AppCompatActivity implements Activity{
 
     class ViewHolder {
+        ViewPager viewPager;
         ImageView image;
         TextView title, name, price, description;
     }
@@ -30,7 +33,7 @@ public class DetailsActivity extends AppCompatActivity implements Activity{
 
         vh = new ViewHolder();
         vh.title = (TextView) findViewById(R.id.item_title);
-        vh.image = (ImageView) findViewById(R.id.item_image);
+        vh.viewPager = (ViewPager) findViewById(R.id.item_images);
         vh.name = (TextView) findViewById(R.id.name);
         vh.price = (TextView) findViewById(R.id.price);
         vh.description = (TextView) findViewById(R.id.description);
@@ -39,7 +42,10 @@ public class DetailsActivity extends AppCompatActivity implements Activity{
         item = (Electronic) intent.getSerializableExtra(ListActivity.ITEM);
         String title = item.getName();
         vh.title.setText(title);
-        vh.image.setImageResource(item.getImages().get(0));
+
+        ImageSliderAdapter adapter = new ImageSliderAdapter(this, item);
+        vh.viewPager.setAdapter(adapter);
+
         vh.name.setText(item.getName());
         String price = "$ " + item.getPrice().toString();
         vh.price.setText(price);
@@ -52,10 +58,6 @@ public class DetailsActivity extends AppCompatActivity implements Activity{
         finish();
     }
 
-    @Override
-    public ListActivity search(String searchInput) {
-        return null;
-    }
 
     @Override
     public void quitApplication() {

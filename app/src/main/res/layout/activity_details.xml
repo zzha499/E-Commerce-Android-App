@@ -40,12 +40,11 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/item_image"
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/item_images"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:contentDescription="@string/item_image"
-            app:srcCompat="@drawable/ic_launcher_foreground" />
+            android:contentDescription="@string/item_images" />
 
         <TextView
             android:id="@+id/name"

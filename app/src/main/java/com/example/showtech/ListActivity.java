@@ -76,10 +76,6 @@ public class ListActivity extends AppCompatActivity  implements Activity, ListAd
         finish();
     }
 
-    @Override
-    public ListActivity search(String searchInput) {
-        return null;
-    }
 
     @Override
     public void quitApplication() {
