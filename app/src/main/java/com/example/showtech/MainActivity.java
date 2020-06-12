@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.showtech.items.Electronic;
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity  implements Activity, ListAd
         vh.top_selling.setItemAnimator(new DefaultItemAnimator());
 
         dataProvider = new DataProvider(this);
-        items = dataProvider.provideData("top selling");
+        items = dataProvider.provideData("all");
         adapter = new ListAdapter(items);
         adapter.setClickListener(this);
         vh.top_selling.setAdapter(adapter);
@@ -78,6 +79,8 @@ public class MainActivity extends AppCompatActivity  implements Activity, ListAd
     @Override
     public void onItemClick(View view, int position) {
         Electronic item = adapter.getItem(position);
+        item.addView();
+        adapter.sort();
         Toast.makeText(view.getContext(), item.getName(), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, DetailsActivity.class);
         intent.putExtra(ITEM, item);

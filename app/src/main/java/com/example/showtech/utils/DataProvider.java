@@ -11,7 +11,7 @@ public class DataProvider {
 
     public static class electronicData {
         static String[][] computers = {
-                {"Alien", "100", "alien_computer", "The Alien gaming computer"},
+                {"Alien", "100", "alien_computer", "The Alien gaming computer The Alien gaming computer The Alien gaming computer The Alien gaming computer The Alien gaming computer "},
                 {"Mac", "2000", "mac_computer", "The Mac computer"},
                 {"Hp", "2000", "hp_computer", "The Hp computer"},
                 {"Lenovo", "300", "lenovo_computer", "The Lenovo computer"},

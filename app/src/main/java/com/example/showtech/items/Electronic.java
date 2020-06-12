@@ -5,6 +5,7 @@ import com.example.showtech.DetailsActivity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Electronic implements Serializable {
 
@@ -14,9 +15,11 @@ public class Electronic implements Serializable {
     private String specification;
     private DetailsActivity details;
     private int[] images;
+    private int views;
 
     public Electronic() {
         specification = "";
+        views = ThreadLocalRandom.current().nextInt(0, 11);
     }
 
     public String getName() {
@@ -69,5 +72,13 @@ public class Electronic implements Serializable {
         for (int i = 0; i < images.size(); i++) {
             this.images[i] = images.get(i);
         }
+    }
+
+    public int getViews() {
+        return views;
+    }
+
+    public void addView() {
+        this.views++;
     }
 }

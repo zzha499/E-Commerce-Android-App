@@ -1,6 +1,5 @@
 package com.example.showtech.utils;
 
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +22,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
     private ArrayList<Electronic> items;
     private ArrayList<Electronic> filteredItems;
     private ItemClickListener itemClickListener;
+    private ItemComparator itemComparator;
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -54,8 +54,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
     }
 
     public ListAdapter(ArrayList<Electronic> items) {
+        itemComparator = new ItemComparator();
         this.items = items;
         this.filteredItems = items;
+        this.items.sort(itemComparator);
+        this.filteredItems.sort(itemComparator);
     }
 
     @NonNull
@@ -103,7 +106,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
                 String charString = charSequence.toString();
                 if (charString.isEmpty()) {
                     filteredItems = items;
-                } else {
+                }
+                else {
                     ArrayList<Electronic> filteredList = new ArrayList<>();
                     for (Electronic item : items) {
                         if (item.getName().toLowerCase().contains(charString.toLowerCase()) ||
@@ -112,6 +116,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
                             filteredList.add(item);
                         }
                     }
+                    filteredList.sort(itemComparator);
                     filteredItems = filteredList;
                 }
                 FilterResults filterResults = new FilterResults();
@@ -124,5 +129,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
                 notifyDataSetChanged();
             }
         };
+    }
+
+    public void sort() {
+        items.sort(itemComparator);
+        filteredItems.sort(itemComparator);
+        notifyDataSetChanged();
     }
 }
