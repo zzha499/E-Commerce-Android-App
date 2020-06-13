@@ -94,7 +94,7 @@ public class DataProvider {
                         "Internal Storage: 1TB, DDR4-2400MHz.\n" +
                         "Display: 15.6 inch (1080 x 1920) FHD LED Display.\n"},
                 {"Dell XPS 17", "3699", "xps_1 xps_2 xps_3", "\n17-inch laptop in a 15-inch size loaded with power. Featuring 10th Gen Intel® Core™ processors, up to NVIDIA® GeForce RTX™ 2060 graphics and a studio-quality display."},
-                {"MacBook Pro", "4999", "mbp_16_1 mbp_16_1 mbp_16_1", "Apple MacBook Pro 16-inch 1TB: \n" +
+                {"MacBook Pro", "4999", "mbp_16_2 mbp_16_1 mbp_16_3", "Apple MacBook Pro 16-inch 1TB: \n" +
                         "Ninth-generation 8-core Intel Core i9 processor\n" +
                         "Stunning 16-inch Retina display with True Tone technology\n" +
                         "Touch Bar and Touch ID\n"},
