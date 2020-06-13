@@ -6,19 +6,16 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.showtech.items.Electronic;
 import com.example.showtech.utils.ImageSliderAdapter;
 
 import java.util.Objects;
 
-public class DetailsActivity extends AppCompatActivity implements Activity{
+public class DetailsActivity extends AppCompatActivity{
 
-    class ViewHolder {
+    static class ViewHolder {
         ViewPager viewPager;
-        ImageView image;
         TextView title, name, price, description;
     }
 
@@ -39,7 +36,7 @@ public class DetailsActivity extends AppCompatActivity implements Activity{
         vh.description = (TextView) findViewById(R.id.description);
 
         Intent intent = getIntent();
-        item = (Electronic) intent.getSerializableExtra(ListActivity.ITEM);
+        item = (Electronic) intent.getSerializableExtra(ListActivity.EXTRA_ITEM);
         String title = item.getName();
         vh.title.setText(title);
 
@@ -53,16 +50,8 @@ public class DetailsActivity extends AppCompatActivity implements Activity{
 
     }
 
-    @Override
     public void back(View view) {
         finish();
     }
-
-
-    @Override
-    public void quitApplication() {
-
-    }
-
 
 }

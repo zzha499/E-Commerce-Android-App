@@ -8,23 +8,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.example.showtech.items.Electronic;
 import com.example.showtech.utils.DataProvider;
 import com.example.showtech.utils.ListAdapter;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity  implements Activity, ListAdapter.ItemClickListener {
+public class MainActivity extends AppCompatActivity  implements ListAdapter.ItemClickListener {
 
-    public final static String EXTRA_MESSAGE = "com.example.showtech.MESSAGE";
-    private static final String ITEM = "com.example.showtech.ITEM";
+    public static final String EXTRA_MESSAGE = "com.example.showtech.MESSAGE";
+    public static final String EXTRA_ITEM = "com.example.showtech.ITEM";
 
     static class ViewHolder {
         RecyclerView top_selling;
@@ -48,7 +45,7 @@ public class MainActivity extends AppCompatActivity  implements Activity, ListAd
 
         vh = new ViewHolder();
         vh.computer = (LinearLayout) findViewById(R.id.computer);
-        vh.mobile_phone = (LinearLayout) findViewById(R.id.mobile_phone);
+        vh.mobile_phone = (LinearLayout) findViewById(R.id.mobile);
         vh.music = (LinearLayout) findViewById(R.id.music);
         vh.camera = (LinearLayout) findViewById(R.id.camera);
         vh.gaming = (LinearLayout) findViewById(R.id.gaming);
@@ -83,12 +80,8 @@ public class MainActivity extends AppCompatActivity  implements Activity, ListAd
         adapter.sort();
         Toast.makeText(view.getContext(), item.getName(), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, DetailsActivity.class);
-        intent.putExtra(ITEM, item);
+        intent.putExtra(EXTRA_ITEM, item);
         startActivity(intent);
-    }
-
-    @Override
-    public void back(View view) {
     }
 
     public void search(View view) {
@@ -96,9 +89,7 @@ public class MainActivity extends AppCompatActivity  implements Activity, ListAd
         startActivity(intent);
     }
 
-    @Override
-    public void quitApplication() {
-        getApplication();
+    public static ListAdapter getAdapter() {
+        return adapter;
     }
-
 }

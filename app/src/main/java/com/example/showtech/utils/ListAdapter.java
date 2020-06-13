@@ -12,14 +12,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.showtech.R;
-import com.example.showtech.items.Electronic;
+import com.example.showtech.Electronic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> implements Filterable {
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> implements Filterable, Serializable {
 
 
-    private ArrayList<Electronic> items;
+    private static ArrayList<Electronic> items;
     private ArrayList<Electronic> filteredItems;
     private ItemClickListener itemClickListener;
     private ItemComparator itemComparator;
@@ -55,9 +56,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
 
     public ListAdapter(ArrayList<Electronic> items) {
         itemComparator = new ItemComparator();
-        this.items = items;
+        ListAdapter.items = items;
         this.filteredItems = items;
-        this.items.sort(itemComparator);
+        ListAdapter.items.sort(itemComparator);
         this.filteredItems.sort(itemComparator);
     }
 
@@ -83,11 +84,15 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
 
     @Override
     public int getItemCount() {
-        return filteredItems.size();
+        return Math.min(filteredItems.size(), 5);
     }
 
     public Electronic getItem(int id) {
         return filteredItems.get(id);
+    }
+
+    public static ArrayList<Electronic> getItems() {
+        return items;
     }
 
     public void setClickListener(ItemClickListener itemClickListener) {
@@ -106,6 +111,17 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
                 String charString = charSequence.toString();
                 if (charString.isEmpty()) {
                     filteredItems = items;
+                }
+                else if (charString.contains("category:")) {
+                    String category = charString.split(" ")[1];
+                    ArrayList<Electronic> filteredList = new ArrayList<>();
+                    for (Electronic item : items) {
+                        if (item.getElectronicType().name().toLowerCase().equals(category.toLowerCase())) {
+                            filteredList.add(item);
+                        }
+                    }
+                    filteredList.sort(itemComparator);
+                    filteredItems = filteredList;
                 }
                 else {
                     ArrayList<Electronic> filteredList = new ArrayList<>();

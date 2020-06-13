@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.showtech.items.Electronic;
+import com.example.showtech.Electronic;
 
 public class ImageSliderAdapter extends PagerAdapter {
 

@@ -1,7 +1,8 @@
-package com.example.showtech.items;
+package com.example.showtech;
 
 
 import com.example.showtech.DetailsActivity;
+import com.example.showtech.utils.ElectronicType;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,12 +15,13 @@ public class Electronic implements Serializable {
     private String description;
     private String specification;
     private DetailsActivity details;
+    private ElectronicType electronicType;
     private int[] images;
     private int views;
 
     public Electronic() {
         specification = "";
-        views = ThreadLocalRandom.current().nextInt(0, 11);
+        views = ThreadLocalRandom.current().nextInt(0, 5);
     }
 
     public String getName() {
@@ -80,5 +82,13 @@ public class Electronic implements Serializable {
 
     public void addView() {
         this.views++;
+    }
+
+    public ElectronicType getElectronicType() {
+        return electronicType;
+    }
+
+    public void setElectronicType(ElectronicType electronicType) {
+        this.electronicType = electronicType;
     }
 }

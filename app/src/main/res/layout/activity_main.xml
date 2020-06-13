@@ -123,13 +123,13 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/mobile_phone"
+                android:id="@+id/mobile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="3dp"
                 android:background="@color/DarkGrey"
                 android:clickable="true"
-                android:contentDescription="@string/mobile_phone"
+                android:contentDescription="@string/mobile"
                 android:onClick="selectCategory"
                 android:orientation="horizontal">
 
@@ -137,7 +137,7 @@
                     android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:contentDescription="@string/mobile_phone"
+                    android:contentDescription="@string/mobile"
                     android:padding="5dp"
                     android:scaleType="centerInside"
                     app:srcCompat="@drawable/android" />
@@ -147,7 +147,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="12"
                     android:gravity="center_vertical"
-                    android:text="@string/mobile_phone"
+                    android:text="@string/mobile"
                     android:textColor="#E0E0E0"
                     android:textSize="18sp"
                     android:textStyle="bold" />

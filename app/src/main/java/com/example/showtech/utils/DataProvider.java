@@ -1,7 +1,7 @@
 package com.example.showtech.utils;
 
 import android.content.Context;
-import com.example.showtech.items.Electronic;
+import com.example.showtech.Electronic;
 
 import java.util.ArrayList;
 
@@ -23,7 +23,7 @@ public class DataProvider {
                 {"iPad Pro 2020", "1499", "ipad_pro_1 ipad_pro_2 ipad_pro_3", "The iPad Pro 2020"}
         };
 
-        static String[][] mobile_phone = {
+        static String[][] mobile = {
                 {"iPhone SE", "799", "iphone_se_1 iphone_se_2 iphone_se_3", "New iPhone SE"},
                 {"iPhone 11", "1349", "iphone11_1 iphone11_2 iphone11_3", "iPhone 11"},
                 {"iPhone 11 Pro", "1949", "iphone11p_1 iphone11p_2 iphone11p_3", "iPhone 11 Pro"},
@@ -84,28 +84,36 @@ public class DataProvider {
     public ArrayList<Electronic> provideData(String category){
         ArrayList<Electronic> items = new ArrayList<>();
         String[][] data = {};
+        ElectronicType type = ElectronicType.UNKNOWN;
         switch (category.toLowerCase()) {
             case "computer":
                 data = electronicData.computers;
+                type = ElectronicType.COMPUTER;
                 break;
-            case "mobile phone":
-                data = electronicData.mobile_phone;
+            case "mobile":
+                data = electronicData.mobile;
+                type = ElectronicType.MOBILE;
                 break;
             case "music":
                 data = electronicData.music;
+                type = ElectronicType.MUSIC;
                 break;
             case "camera":
                 data = electronicData.camera;
+                type = ElectronicType.CAMERA;
                 break;
             case "gaming":
                 data = electronicData.gaming;
-                break;
-            case "top selling":
-                data = combine(electronicData.mobile_phone, electronicData.computers);
+                type = ElectronicType.GAMING;
                 break;
             case "all":
-                data = combine(combine(combine(combine(electronicData.computers, electronicData.mobile_phone), electronicData.music), electronicData.camera), electronicData.gaming);
-                break;
+                ArrayList<Electronic> allItems = new ArrayList<>();
+                allItems.addAll(provideData("computer"));
+                allItems.addAll(provideData("mobile"));
+                allItems.addAll(provideData("camera"));
+                allItems.addAll(provideData("music"));
+                allItems.addAll(provideData("gaming"));
+                return allItems;
         }
 
         for (String[] d : data) {
@@ -120,6 +128,7 @@ public class DataProvider {
             }
             item.setImages(images);
             item.setDescription(d[3]);
+            item.setElectronicType(type);
 
             items.add(item);
         }
@@ -127,12 +136,5 @@ public class DataProvider {
         return items;
     }
 
-    private static String[][] combine(String[][] a, String[][] b){
-        int length = a.length + b.length;
-        String[][] result = new String[length][];
-        System.arraycopy(a, 0, result, 0, a.length);
-        System.arraycopy(b, 0, result, a.length, b.length);
-        return result;
-    }
 
 }

@@ -1,6 +1,6 @@
 package com.example.showtech.utils;
 
-import com.example.showtech.items.Electronic;
+import com.example.showtech.Electronic;
 
 import java.util.Comparator;
 
