@@ -57,7 +57,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
             }
             else{
                 imageView.setImageResource(item.getImages()[0]);
-                String displayedPrice = "$ " + df2.format(item.getPrice());
+                String displayedPrice = "$" + df2.format(item.getPrice());
                 price.setText(displayedPrice);
                 description.setText(item.getDescription());
                 price.setVisibility(View.VISIBLE);

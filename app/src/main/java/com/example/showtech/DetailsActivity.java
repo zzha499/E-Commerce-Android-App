@@ -68,7 +68,7 @@ public class DetailsActivity extends AppCompatActivity implements BaseSliderView
         vh.imageSlider.setDuration(4000);
 
         vh.name.setText(item.getName());
-        String price = "$ " + df2.format(item.getPrice());
+        String price = "$" + df2.format(item.getPrice());
         vh.price.setText(price);
         vh.description.setText(item.getDescription());
         vh.description.setMovementMethod(new ScrollingMovementMethod());

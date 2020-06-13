@@ -45,6 +45,7 @@
                 android:id="@+id/price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/droid_serif_bold_italic"
                 android:text="@string/place_holder"
                 android:textColor="@android:color/holo_red_dark"
                 android:textStyle="bold" />

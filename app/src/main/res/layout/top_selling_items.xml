@@ -37,6 +37,7 @@
             android:id="@+id/price"
             android:layout_width="match_parent"
             android:layout_height="20dp"
+            android:fontFamily="@font/droid_serif_bold_italic"
             android:text="@string/place_holder"
             android:textAlignment="center"
             android:textColor="@android:color/holo_red_dark"
