@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -84,6 +85,17 @@ public class SearchActivity extends AppCompatActivity  implements ListAdapter.It
         Intent intent = new Intent(this, DetailsActivity.class);
         intent.putExtra(ITEM, item);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if ((keyCode == KeyEvent.KEYCODE_BACK))
+        {
+            MainActivity.getAdapter().sort();
+            finish();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     public void back(View view) {
