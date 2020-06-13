@@ -130,6 +130,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
                     String[] charStrings = charString.split(" ");
                     ArrayList<Electronic> filteredList = new ArrayList<>();
                     for (Electronic item : items) {
+                        if (isCategory(charString) && charString.toLowerCase().contains(item.getElectronicType().name().toLowerCase())) {
+                            filteredList.add(item);
+                        }
+                    }
+                    for (Electronic item : items) {
                         if (containTerms(item, charStrings)) {
                             filteredList.add(item);
                         }
@@ -137,7 +142,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
                     if (filteredList.isEmpty()) {
                         filteredList.add(new Electronic(ElectronicType.UNKNOWN));
                     }
-                    filteredList.sort(itemComparator);
                     filteredItems = filteredList;
                 }
                 FilterResults filterResults = new FilterResults();
@@ -181,5 +185,15 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
             }
         }
         return true;
+    }
+
+    private boolean isCategory(String term) {
+        String[] categories = {"computer", "computers", "mobile", "mobiles", "mobile phone", "mobile phones", "music", "musics", "camera", "cameras", "gaming", "game", "games"};
+        for (String category : categories) {
+            if (term.toLowerCase().equals(category)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
