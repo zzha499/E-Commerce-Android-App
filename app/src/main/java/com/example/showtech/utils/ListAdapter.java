@@ -24,6 +24,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
     private ArrayList<Electronic> filteredItems;
     private ItemClickListener itemClickListener;
     private ItemComparator itemComparator;
+    private boolean topSellingList;
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -46,11 +47,20 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         }
 
         void bind(Electronic item) {
-            imageView.setImageResource(item.getImages()[0]);
             name.setText(item.getName());
-            String displayedPrice = "$ " + item.getPrice().toString();
-            price.setText(displayedPrice);
-            description.setText(item.getDescription());
+            if (item.getElectronicType() == ElectronicType.UNKNOWN) {
+                imageView.setVisibility(View.GONE);
+                price.setText(R.string.no_result_message);
+                description.setVisibility(View.INVISIBLE);
+            }
+            else{
+                imageView.setImageResource(item.getImages()[0]);
+                String displayedPrice = "$ " + item.getPrice().toString();
+                price.setText(displayedPrice);
+                description.setText(item.getDescription());
+                imageView.setVisibility(View.VISIBLE);
+                description.setVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -67,6 +77,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
     public ListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
         if (parent.getContentDescription().equals("Top Selling")) {
+            topSellingList = true;
             view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.top_selling_items, parent, false);
         }
@@ -84,15 +95,16 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
 
     @Override
     public int getItemCount() {
-        return Math.min(filteredItems.size(), 5);
+        if (topSellingList) {
+            return 5;
+        }
+        else {
+            return filteredItems.size();
+        }
     }
 
     public Electronic getItem(int id) {
         return filteredItems.get(id);
-    }
-
-    public static ArrayList<Electronic> getItems() {
-        return items;
     }
 
     public void setClickListener(ItemClickListener itemClickListener) {
@@ -112,25 +124,16 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
                 if (charString.isEmpty()) {
                     filteredItems = items;
                 }
-                else if (charString.contains("category:")) {
-                    String category = charString.split(" ")[1];
+                else {
+                    String[] charStrings = charString.split(" ");
                     ArrayList<Electronic> filteredList = new ArrayList<>();
                     for (Electronic item : items) {
-                        if (item.getElectronicType().name().toLowerCase().equals(category.toLowerCase())) {
+                        if (containTerms(item, charStrings)) {
                             filteredList.add(item);
                         }
                     }
-                    filteredList.sort(itemComparator);
-                    filteredItems = filteredList;
-                }
-                else {
-                    ArrayList<Electronic> filteredList = new ArrayList<>();
-                    for (Electronic item : items) {
-                        if (item.getName().toLowerCase().contains(charString.toLowerCase()) ||
-                                item.getDescription().toLowerCase().contains(charString.toLowerCase()) ||
-                                item.getSpecification().toLowerCase().contains(charString.toLowerCase())) {
-                            filteredList.add(item);
-                        }
+                    if (filteredList.isEmpty()) {
+                        filteredList.add(new Electronic(ElectronicType.UNKNOWN));
                     }
                     filteredList.sort(itemComparator);
                     filteredItems = filteredList;
@@ -147,9 +150,32 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         };
     }
 
+    public static ArrayList<Electronic> getItems() {
+        return items;
+    }
+
     public void sort() {
         items.sort(itemComparator);
         filteredItems.sort(itemComparator);
         notifyDataSetChanged();
+    }
+
+    private boolean containTerms(Electronic item, String[] terms) {
+        for (String term : terms) {
+            if (term.contains("category:")) {
+                String category = term.split(":")[1];
+                if (!item.getElectronicType().name().toLowerCase().equals(category.toLowerCase())) {
+                    return false;
+                }
+
+            } else {
+                if (!(item.getName().toLowerCase().contains(term.toLowerCase()) ||
+                        item.getDescription().toLowerCase().contains(term.toLowerCase()) ||
+                        item.getSpecification().toLowerCase().contains(term.toLowerCase()))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

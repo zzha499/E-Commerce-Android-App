@@ -56,7 +56,7 @@ public class SearchActivity extends AppCompatActivity  implements ListAdapter.It
         adapter.setClickListener(this);
         vh.search_results.setAdapter(adapter);
 
-
+        vh.searchView.setIconified(false);
     }
 
     private void search(SearchView searchView) {

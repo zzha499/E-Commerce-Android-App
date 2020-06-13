@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ public class ListActivity extends AppCompatActivity  implements ListAdapter.Item
 
     static class ViewHolder {
         RecyclerView list_of_items;
+        SearchView searchView;
         TextView title;
 
     }
@@ -32,6 +34,7 @@ public class ListActivity extends AppCompatActivity  implements ListAdapter.Item
     private static ListAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Electronic> items;
+    private String category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +45,11 @@ public class ListActivity extends AppCompatActivity  implements ListAdapter.Item
         vh = new ViewHolder();
         vh.list_of_items = (RecyclerView) findViewById(R.id.list_of_items);
         vh.title = (TextView) findViewById(R.id.category_title);
+        vh.searchView = (SearchView) findViewById(R.id.search);
+        search(vh.searchView);
 
         Intent intent = getIntent();
-        String category = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        category = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
         vh.title.setText(category);
 
         vh.list_of_items.setHasFixedSize(true);
@@ -54,7 +59,7 @@ public class ListActivity extends AppCompatActivity  implements ListAdapter.Item
 
         items = ListAdapter.getItems();
         adapter = new ListAdapter(items);
-        adapter.getFilter().filter("category: " + category);
+        adapter.getFilter().filter("category:" + category);
         adapter.setClickListener(this);
         vh.list_of_items.setAdapter(adapter);
 
@@ -69,6 +74,21 @@ public class ListActivity extends AppCompatActivity  implements ListAdapter.Item
         Intent intent = new Intent(this, DetailsActivity.class);
         intent.putExtra(EXTRA_ITEM, item);
         startActivity(intent);
+    }
+
+    private void search(SearchView searchView) {
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter("category:" + category + " " + newText);
+                return true;
+            }
+        });
     }
 
     public void back(View view) {

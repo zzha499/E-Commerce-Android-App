@@ -1,7 +1,8 @@
 package com.example.showtech;
 
+import android.content.Context;
+import android.widget.AbsListView;
 
-import com.example.showtech.DetailsActivity;
 import com.example.showtech.utils.ElectronicType;
 
 import java.io.Serializable;
@@ -14,7 +15,6 @@ public class Electronic implements Serializable {
     private Float price;
     private String description;
     private String specification;
-    private DetailsActivity details;
     private ElectronicType electronicType;
     private int[] images;
     private int views;
@@ -22,6 +22,10 @@ public class Electronic implements Serializable {
     public Electronic() {
         specification = "";
         views = ThreadLocalRandom.current().nextInt(0, 5);
+    }
+    public Electronic(ElectronicType type) {
+        this.name = "No Results Found";
+        this.electronicType = type;
     }
 
     public String getName() {
@@ -54,14 +58,6 @@ public class Electronic implements Serializable {
 
     public void setSpecification(String specification) {
         this.specification = specification;
-    }
-
-    public DetailsActivity getDetails() {
-        return details;
-    }
-
-    public void setDetails(DetailsActivity details) {
-        this.details = details;
     }
 
     public int[] getImages() {

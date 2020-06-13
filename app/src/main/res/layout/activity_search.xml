@@ -39,7 +39,7 @@
         android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/GreyWhite" />
+        android:background="@color/White" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_results"
