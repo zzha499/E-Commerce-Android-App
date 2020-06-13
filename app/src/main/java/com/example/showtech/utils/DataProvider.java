@@ -187,7 +187,7 @@ public class DataProvider {
                 {"Sonos Speaker", "1199", "sonos_subgen3_1 sonos_subgen3_2 sonos_subgen3_3", "\nSonos Sub Gen 3 (White):\n" +
                         "Connect Sub to any Sonos system for a more immersive home theatre and music experience.\n" +
                         "Enduring design continues to fit perfectly into any space.\n\n" +
-                        "The wireless subwoofer for deep bass\n"},
+                        "A great wireless subwoofer for deep bass\n"},
                 {"Sony Headphone", "449", "sony_wh1000xm3_1 sony_wh1000xm3_2 sony_wh1000xm3_3", "\nSony WH-XB900N Extra Bass Wireless Noise Cancelling Over-Ear Headphones:\n" +
                         "Up to 30 hours battery life\n" +
                         "Voice control, including Amazon Alexa and Siri\n" +
