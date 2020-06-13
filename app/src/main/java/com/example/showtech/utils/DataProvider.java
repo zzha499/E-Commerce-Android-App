@@ -9,6 +9,67 @@ public class DataProvider {
 
     private Context context;
 
+
+    public DataProvider(Context context){
+        this.context = context;
+    }
+
+
+    public ArrayList<Electronic> provideData(String category){
+        ArrayList<Electronic> items = new ArrayList<>();
+        String[][] data = {};
+        ElectronicType type = ElectronicType.UNKNOWN;
+        switch (category.toLowerCase()) {
+            case "computer":
+                data = electronicData.computers;
+                type = ElectronicType.COMPUTER;
+                break;
+            case "mobile":
+                data = electronicData.mobile;
+                type = ElectronicType.MOBILE;
+                break;
+            case "music":
+                data = electronicData.music;
+                type = ElectronicType.MUSIC;
+                break;
+            case "camera":
+                data = electronicData.camera;
+                type = ElectronicType.CAMERA;
+                break;
+            case "gaming":
+                data = electronicData.gaming;
+                type = ElectronicType.GAMING;
+                break;
+            case "all":
+                ArrayList<Electronic> allItems = new ArrayList<>();
+                allItems.addAll(provideData("computer"));
+                allItems.addAll(provideData("mobile"));
+                allItems.addAll(provideData("camera"));
+                allItems.addAll(provideData("music"));
+                allItems.addAll(provideData("gaming"));
+                return allItems;
+        }
+
+        for (String[] d : data) {
+            Electronic item = new Electronic();
+            item.setName(d[0]);
+            item.setPrice(Float.parseFloat(d[1]));
+            ArrayList<Integer> images = new ArrayList<>();
+            String[] imagesIDs = d[2].split(" ");
+            for (String s : imagesIDs) {
+                int id = context.getResources().getIdentifier(s, "drawable", context.getPackageName());
+                images.add(id);
+            }
+            item.setImages(images);
+            item.setDescription(d[3]);
+            item.setElectronicType(type);
+
+            items.add(item);
+        }
+
+        return items;
+    }
+
     public static class electronicData {
         static String[][] computers = {
                 {"Alienware M15", "2974", "alien_1 alien_2 alien_3", "\nALIENWARE M15 R3 GAMING LAPTOP: Alienware’s most thin and powerful 15\" laptop ever. Now with the option for up to 10th gen Intel Core i9k processors with up to 12-phase Hyper Efficient Voltage regulation."},
@@ -188,78 +249,65 @@ public class DataProvider {
         };
 
         static String[][] gaming = {
-                {"Xbox One", "399", "xbox_1 xbox_2 xbox_3", "The Alien gaming computer"},
-                {"Nintendo Switch", "529", "switch_1 switch_2 switch_3", "The Mac computer"},
-                {"PS4", "469", "ps4_1 ps4_2 ps4_3", "The Hp computer"},
-                {"PlayStation VR", "319", "ps_vr_1 ps_vr_2 ps_vr_3", "The Lenovo computer"},
-                {"PlayStation Move", "129", "ps_move_1 ps_move_2 ps_move_3", "The Alien gaming computer"},
-                {"PS4 Pro", "639", "ps4pro_1 ps4pro_2 ps4pro_3", "The Mac computer"},
-                {"SpongeBob Game", "279", "spongebob_1 spongebob_2 spongebob_3", "The Hp computer"},
-                {"Nintendo Switch lite", "369", "switch_lite_1 switch_lite_2 switch_lite_3", "The Lenovo computer"},
-                {"StarWar Game", "99", "starwar_1 starwar_2 starwar_3", "The Lenovo computer"},
-                {"Avengers Game", "94", "avengers_1 avengers_2 avengers_3", "The Alien gaming computer"}
+                {"Xbox One", "399", "xbox_1 xbox_2 xbox_3", "\nXbox One X 1TB Console:\n" +
+                        "Games play better on Xbox One X. Experience 40% more power than any other console.\n" +
+                        "6 teraflops of graphical processing power and a 4K Blu-ray player provide more immersive gaming and entertainment1\n" +
+                        "Play with the greatest community of gamers on the most advanced multiplayer network4\n" +
+                        "Works with all your Xbox One games and accessories\n" +
+                        "Great for 1080p screens—games run smoothly, look great, and load quickly\n"},
+                {"Nintendo Switch", "529", "switch_1 switch_2 switch_3", "\nNintendo Switch Console Neon:\n" +
+                        "Size: Approximately 4 inches high, 9.4 inches long, and 0.55 inches deep (with Joy-Con attached)\n" +
+                        "Weight: Approximately .66 lbs\n" +
+                        "(Approximately .88 lbs when Joy-Con controllers are attached)\n" +
+                        "Screen: Multi-touch capacitive touch screen / 6.2-inch LCD Screen / 1280 x 720\n" +
+                        "CPU/GPU: NVIDIA Custom Tegra processor\n" +
+                        "Storage: 32 GB of internal storage, a portion of which is reserved for use by the system. Users can easily expand storage space using microSDHC or microSDXC cards up to 2TB (sold separately).Released on 09/08/2019\n"},
+                {"PS4", "469", "ps4_1 ps4_2 ps4_3", "\nPS4 PlayStation 4 500GB Console Glacier White:\n" +
+                        "Store your games, apps, screenshots and videos with 500GB and 1TB models – slimmer and lighter than the original PS4 model and available in Jet Black, Glacier White and now stunning Gold and Silver.\n" +
+                        "Experience incredibly vivid, vibrant colours with breathtaking HDR visuals.\n" +
+                        "Organise your games and apps and share with friends from a new, intuitive interface.\n" +
+                        "Store your games, apps, screenshots and videos with 500GB and 1TB options.\n" +
+                        "All the greatest TV, movies and more from your favourite entertainment apps.\n"},
+                {"PlayStation VR", "319", "ps_vr_1 ps_vr_2 ps_vr_3", "\nPlayStation VR with Camera and Game Bundle (V4):\n" +
+                        "5.7” OLED screen\n" +
+                        "See hyper-real 3D environments come to life with a custom OLED screen.\n" +
+                        "360-degree vision\n" +
+                        "Whichever way you turn the 360-degree immersion of PS VR makes you part of a living, breathing world with a seamless field of view.\n" +
+                        "120 frames per second\n" +
+                        "Smooth visuals and super low latency combine to create an incredibly immersive gaming world.\n" +
+                        "3D audio\n" +
+                        "Discover a new dimension in sound with cutting-edge 3D audio that lets you accurately perceive the direction and distance of sounds that are coming from above, below and all around you.\n" +
+                        "Built in mic\n" +
+                        "Chat to your online friends, discuss in-game tactics and strengthen your immersion in the virtual world with the headset’s integrated microphone.\n"},
+                {"PlayStation Move", "129", "ps_move_1 ps_move_2 ps_move_3", "\nPS4 PlayStation Move Twin Pack:\n" +
+                        "Ergonomic, intuitive design - Thanks to a lightweight design, built-in vibration function and sphere that’s tracked by the PlayStation Camera as you move, the controller acts and feels like an extension of your own hand, allowing you to intuitively interact with a game’s virtual environment.\n" +
+                        "Take total control - On top of its motion-sensing capabilities, the controller features easy-to-use button controls – including a large, dedicated trigger and the familiar DUALSHOCK 4 PS and action buttons.\n" +
+                        "Wide variety of compatible PlayStation VR games - Combine PlayStation VR with the motion controller for truly unique experiences – once you slip on the headset, motion controllers in your hands become anything, from guns and pool cues to your own virtual hands.\n"},
+                {"PS4 Pro", "639", "ps4pro_1 ps4pro_2 ps4pro_3", "\nPS4 PlayStation 4 Pro 1TB Limited Edition The Last of Us Part II Bundle:\n" +
+                        "On PS4™Pro, 4K TV owners can explore the post-pandemic United States in stunning visual quality. HD TV owners will benefit from the game’s built-in supersampling with increased image clarity and detail. Meanwhile, players whose TVs support high dynamic range (HDR), will notice improved lighting and contrast – helping immerse themselves further in this dangerous world.\n"},
+                {"SpongeBob Game", "279", "spongebob_1 spongebob_2 spongebob_3", "\nSpongeBob Squarepants: Battle for Bikini Bottom Rehydrated (Shiny Edition):\n" +
+                        "Play as SpongeBob, Patrick and Sandy and use their unique sets of skills\n" +
+                        "Thwart Plankton's evil plan to rule Bikini Bottom with his army of wacky robots\n" +
+                        "Meet countless characters from the beloved series\n" +
+                        "Faithful remake of one of the best SpongeBob games ever created\n" +
+                        "High-end visuals, modern resolutions and carefully polished gameplay\n" +
+                        "Brand new horde mode multiplayer for up to two players, online and splitscreen\n" +
+                        "Restored content that was cut from the original game like the Robo Squidward boss fight and more\n"},
+                {"Nintendo Switch lite", "369", "switch_lite_1 switch_lite_2 switch_lite_3", "\nNintendo Switch Lite Console:\n" +
+                        "Nintendo Switch Lite is designed specifically for handheld play—so you can jump into your favourite games wherever you happen to be. Released on 20/09/2019\n"},
+                {"StarWar Game", "99", "starwar_1 starwar_2 starwar_3", "\nLego Star Wars The Skywalker Saga\n" +
+                        "Format ‐ PlayStation 4\n" +
+                        "Genre ‐ Action & Adventure\n" +
+                        "Rating ‐ CTC\n" +
+                        "Consumer Advice ‐ CTC Check the classification\n" +
+                        "Release Date ‐ 31/12/20\n"},
+                {"Avengers Game", "94", "avengers_1 avengers_2 avengers_3", "\nMarvel's Avengers:\n" +
+                        "Format ‐ PlayStation 4\n" +
+                        "Genre ‐ Action & Adventure\n" +
+                        "Rating ‐ CTC\n" +
+                        "Consumer Advice ‐ CTC Check the classfication\n" +
+                        "Release Date ‐ 04/09/20\n"}
         };
     }
-
-    public DataProvider(Context context){
-        this.context = context;
-    }
-
-
-    public ArrayList<Electronic> provideData(String category){
-        ArrayList<Electronic> items = new ArrayList<>();
-        String[][] data = {};
-        ElectronicType type = ElectronicType.UNKNOWN;
-        switch (category.toLowerCase()) {
-            case "computer":
-                data = electronicData.computers;
-                type = ElectronicType.COMPUTER;
-                break;
-            case "mobile":
-                data = electronicData.mobile;
-                type = ElectronicType.MOBILE;
-                break;
-            case "music":
-                data = electronicData.music;
-                type = ElectronicType.MUSIC;
-                break;
-            case "camera":
-                data = electronicData.camera;
-                type = ElectronicType.CAMERA;
-                break;
-            case "gaming":
-                data = electronicData.gaming;
-                type = ElectronicType.GAMING;
-                break;
-            case "all":
-                ArrayList<Electronic> allItems = new ArrayList<>();
-                allItems.addAll(provideData("computer"));
-                allItems.addAll(provideData("mobile"));
-                allItems.addAll(provideData("camera"));
-                allItems.addAll(provideData("music"));
-                allItems.addAll(provideData("gaming"));
-                return allItems;
-        }
-
-        for (String[] d : data) {
-            Electronic item = new Electronic();
-            item.setName(d[0]);
-            item.setPrice(Float.parseFloat(d[1]));
-            ArrayList<Integer> images = new ArrayList<>();
-            String[] imagesIDs = d[2].split(" ");
-            for (String s : imagesIDs) {
-                int id = context.getResources().getIdentifier(s, "drawable", context.getPackageName());
-                images.add(id);
-            }
-            item.setImages(images);
-            item.setDescription(d[3]);
-            item.setElectronicType(type);
-
-            items.add(item);
-        }
-
-        return items;
-    }
-
 
 }

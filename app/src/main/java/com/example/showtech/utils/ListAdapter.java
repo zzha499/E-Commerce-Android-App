@@ -15,6 +15,7 @@ import com.example.showtech.R;
 import com.example.showtech.Electronic;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> implements Filterable, Serializable {
@@ -25,6 +26,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
     private ItemClickListener itemClickListener;
     private ItemComparator itemComparator;
     private boolean topSellingList;
+    private static DecimalFormat df2 = new DecimalFormat("#.##");
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -55,7 +57,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
             }
             else{
                 imageView.setImageResource(item.getImages()[0]);
-                String displayedPrice = "$ " + item.getPrice().toString();
+                String displayedPrice = "$ " + df2.format(item.getPrice());
                 price.setText(displayedPrice);
                 description.setText(item.getDescription());
                 price.setVisibility(View.VISIBLE);
@@ -163,12 +165,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
     private boolean containTerms(Electronic item, String[] terms) {
         for (String term : terms) {
             if (term.contains("category:")) {
-                String category = term.split(":")[1];
-                if (!item.getElectronicType().name().toLowerCase().equals(category.toLowerCase())) {
-                    return false;
+                if (term.split(":").length > 1) {
+                    String category = term.split(":")[1];
+                    if (!item.getElectronicType().name().toLowerCase().equals(category.toLowerCase())) {
+                        return false;
+                    }
                 }
-
-            } else {
+            }
+            else {
                 if (!(item.getName().toLowerCase().contains(term.toLowerCase()) ||
                         item.getDescription().toLowerCase().contains(term.toLowerCase()) ||
                         item.getSpecification().toLowerCase().contains(term.toLowerCase()))) {
