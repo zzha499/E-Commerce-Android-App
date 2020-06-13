@@ -50,7 +50,7 @@ public class DetailsActivity extends AppCompatActivity implements BaseSliderView
             textSliderView
                     .description(title)
                     .image(imageID)
-                    .setScaleType(BaseSliderView.ScaleType.CenterCrop)
+                    .setScaleType(BaseSliderView.ScaleType.FitCenterCrop)
                     .setOnSliderClickListener(this);
 
             textSliderView.bundle(new Bundle());
