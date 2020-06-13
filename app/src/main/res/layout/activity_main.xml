@@ -33,14 +33,15 @@
             android:orientation="horizontal">
 
             <TextView
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
                 android:paddingLeft="30dp"
                 android:paddingRight="30dp"
-                android:text="@string/Top_selling"
+                android:text="@string/Top_Picks"
                 android:textColor="#E0E0E0"
                 android:textSize="24sp"
-                android:textStyle="bold|italic" android:layout_width="0dp"/>
+                android:textStyle="bold|italic" />
 
             <ImageView
                 android:id="@+id/search"
@@ -63,7 +64,7 @@
             android:layout_marginHorizontal="15dp"
             android:layout_marginVertical="5dp"
             android:background="@color/DarkGrey"
-            android:contentDescription="@string/Top_selling"
+            android:contentDescription="@string/Top_Picks"
             android:orientation="horizontal"
             android:paddingHorizontal="20dp"
             android:paddingVertical="20dp"
@@ -87,7 +88,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginHorizontal="15dp"
             android:layout_marginVertical="5dp"
             android:background="@color/Grey"
@@ -97,165 +98,161 @@
             <LinearLayout
                 android:id="@+id/computer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginBottom="3dp"
+                android:layout_weight="1"
                 android:background="@color/DarkGrey"
                 android:clickable="true"
+                android:contentDescription="@string/computer"
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:contentDescription="@string/computer"
                 android:onClick="selectCategory"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="150dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
+                    android:layout_height="match_parent"
                     android:contentDescription="@string/computer"
+                    android:padding="10dp"
                     android:scaleType="centerInside"
                     app:srcCompat="@drawable/computer" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="12"
                     android:fontFamily="sans-serif"
                     android:gravity="center_vertical"
                     android:text="@string/computer"
                     android:textColor="#E0E0E0"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/mobile"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginBottom="3dp"
+                android:layout_weight="1"
                 android:background="@color/DarkGrey"
                 android:clickable="true"
+                android:contentDescription="@string/mobile"
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:contentDescription="@string/mobile"
                 android:onClick="selectCategory"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="150dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
+                    android:layout_height="match_parent"
                     android:contentDescription="@string/mobile"
-                    android:padding="5dp"
+                    android:padding="10dp"
                     android:scaleType="centerInside"
                     app:srcCompat="@drawable/android" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="12"
                     android:gravity="center_vertical"
                     android:text="@string/mobile"
                     android:textColor="#E0E0E0"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/music"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginBottom="3dp"
+                android:layout_weight="1"
                 android:background="@color/DarkGrey"
                 android:clickable="true"
+                android:contentDescription="@string/music"
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:contentDescription="@string/music"
                 android:onClick="selectCategory"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="150dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
+                    android:layout_height="match_parent"
                     android:contentDescription="@string/music"
-                    android:padding="5dp"
+                    android:padding="10dp"
                     android:scaleType="centerInside"
                     app:srcCompat="@drawable/music_items" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="12"
                     android:gravity="center_vertical"
                     android:text="@string/music"
                     android:textColor="#E0E0E0"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/camera"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginBottom="3dp"
+                android:layout_weight="1"
                 android:background="@color/DarkGrey"
                 android:clickable="true"
+                android:contentDescription="@string/camera"
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:contentDescription="@string/camera"
                 android:onClick="selectCategory"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="150dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
+                    android:layout_height="match_parent"
                     android:contentDescription="@string/camera"
-                    android:padding="5dp"
+                    android:padding="10dp"
                     android:scaleType="centerInside"
                     app:srcCompat="@drawable/camera" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="12"
                     android:gravity="center_vertical"
                     android:text="@string/camera"
                     android:textColor="#E0E0E0"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/gaming"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginBottom="3dp"
+                android:layout_weight="1"
                 android:background="@color/DarkGrey"
                 android:clickable="true"
+                android:contentDescription="@string/Gaming"
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:contentDescription="@string/Gaming"
                 android:onClick="selectCategory"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="150dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
+                    android:layout_height="match_parent"
                     android:contentDescription="@string/Gaming"
-                    android:padding="5dp"
+                    android:padding="10dp"
                     android:scaleType="centerInside"
                     app:srcCompat="@drawable/game" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="12"
                     android:gravity="center_vertical"
                     android:text="@string/Gaming"
                     android:textColor="#E0E0E0"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>

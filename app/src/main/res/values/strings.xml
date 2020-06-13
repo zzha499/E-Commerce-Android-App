@@ -5,8 +5,8 @@
     <string name="music">Music</string>
     <string name="camera">Camera</string>
     <string name="Gaming">Gaming</string>
-    <string name="Top_selling">Top Selling</string>
-    <string name="categories">Categories</string>
+    <string name="Top_Picks">Top Picks</string>
+    <string name="categories">Select a Category</string>
     <string name="back">Back</string>
     <string name="item_images">Item Images</string>
     <string name="item_image">Item Image</string>

@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity  implements ListAdapter.Item
     public void onItemClick(View view, int position) {
         Electronic item = adapter.getItem(position);
         item.addView();
-        adapter.sort();
         Toast.makeText(view.getContext(), item.getName(), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, DetailsActivity.class);
         intent.putExtra(EXTRA_ITEM, item);

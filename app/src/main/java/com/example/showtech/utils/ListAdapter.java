@@ -78,7 +78,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
     @Override
     public ListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
-        if (parent.getContentDescription().equals("Top Selling")) {
+        if (parent.getContentDescription().equals("Top Picks")) {
             topSellingList = true;
             view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.top_selling_items, parent, false);
@@ -130,7 +130,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
                     String[] charStrings = charString.split(" ");
                     ArrayList<Electronic> filteredList = new ArrayList<>();
                     for (Electronic item : items) {
-                        if (isCategory(charString) && charString.toLowerCase().contains(item.getElectronicType().name().toLowerCase())) {
+                        if (charString.toLowerCase().contains(item.getElectronicType().name().toLowerCase()) ||
+                                item.getElectronicType().name().toLowerCase().contains(charString.toLowerCase())) {
                             filteredList.add(item);
                         }
                     }
@@ -185,15 +186,5 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
             }
         }
         return true;
-    }
-
-    private boolean isCategory(String term) {
-        String[] categories = {"computer", "computers", "mobile", "mobiles", "mobile phone", "mobile phones", "music", "musics", "camera", "cameras", "gaming", "game", "games"};
-        for (String category : categories) {
-            if (term.toLowerCase().equals(category)) {
-                return true;
-            }
-        }
-        return false;
     }
 }

@@ -5,9 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
-import android.transition.Explode;
 import android.view.View;
-import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +33,6 @@ public class DetailsActivity extends AppCompatActivity implements BaseSliderView
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setExitTransition(new Explode());
         setContentView(R.layout.activity_details);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
@@ -85,6 +82,7 @@ public class DetailsActivity extends AppCompatActivity implements BaseSliderView
     }
 
     public void back(View view) {
+        MainActivity.getAdapter().sort();
         finish();
     }
 
