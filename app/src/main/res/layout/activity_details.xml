@@ -84,6 +84,7 @@
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:lineSpacingExtra="8sp"
                 android:scrollbars="vertical"
                 android:text="@string/place_holder" />
 

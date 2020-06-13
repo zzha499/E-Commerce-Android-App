@@ -9,6 +9,67 @@ public class DataProvider {
 
     private Context context;
 
+
+    public DataProvider(Context context){
+        this.context = context;
+    }
+
+
+    public ArrayList<Electronic> provideData(String category){
+        ArrayList<Electronic> items = new ArrayList<>();
+        String[][] data = {};
+        ElectronicType type = ElectronicType.UNKNOWN;
+        switch (category.toLowerCase()) {
+            case "computer":
+                data = electronicData.computers;
+                type = ElectronicType.COMPUTER;
+                break;
+            case "mobile":
+                data = electronicData.mobile;
+                type = ElectronicType.MOBILE;
+                break;
+            case "music":
+                data = electronicData.music;
+                type = ElectronicType.MUSIC;
+                break;
+            case "camera":
+                data = electronicData.camera;
+                type = ElectronicType.CAMERA;
+                break;
+            case "gaming":
+                data = electronicData.gaming;
+                type = ElectronicType.GAMING;
+                break;
+            case "all":
+                ArrayList<Electronic> allItems = new ArrayList<>();
+                allItems.addAll(provideData("computer"));
+                allItems.addAll(provideData("mobile"));
+                allItems.addAll(provideData("camera"));
+                allItems.addAll(provideData("music"));
+                allItems.addAll(provideData("gaming"));
+                return allItems;
+        }
+
+        for (String[] d : data) {
+            Electronic item = new Electronic();
+            item.setName(d[0]);
+            item.setPrice(Float.parseFloat(d[1]));
+            ArrayList<Integer> images = new ArrayList<>();
+            String[] imagesIDs = d[2].split(" ");
+            for (String s : imagesIDs) {
+                int id = context.getResources().getIdentifier(s, "drawable", context.getPackageName());
+                images.add(id);
+            }
+            item.setImages(images);
+            item.setDescription(d[3]);
+            item.setElectronicType(type);
+
+            items.add(item);
+        }
+
+        return items;
+    }
+
     public static class electronicData {
         static String[][] computers = {
                 {"Alienware M15", "2974", "alien_1 alien_2 alien_3", "\nALIENWARE M15 R3 GAMING LAPTOP: Alienware’s most thin and powerful 15\" laptop ever. Now with the option for up to 10th gen Intel Core i9k processors with up to 12-phase Hyper Efficient Voltage regulation."},
@@ -248,66 +309,5 @@ public class DataProvider {
                         "Release Date ‐ 04/09/20\n"}
         };
     }
-
-    public DataProvider(Context context){
-        this.context = context;
-    }
-
-
-    public ArrayList<Electronic> provideData(String category){
-        ArrayList<Electronic> items = new ArrayList<>();
-        String[][] data = {};
-        ElectronicType type = ElectronicType.UNKNOWN;
-        switch (category.toLowerCase()) {
-            case "computer":
-                data = electronicData.computers;
-                type = ElectronicType.COMPUTER;
-                break;
-            case "mobile":
-                data = electronicData.mobile;
-                type = ElectronicType.MOBILE;
-                break;
-            case "music":
-                data = electronicData.music;
-                type = ElectronicType.MUSIC;
-                break;
-            case "camera":
-                data = electronicData.camera;
-                type = ElectronicType.CAMERA;
-                break;
-            case "gaming":
-                data = electronicData.gaming;
-                type = ElectronicType.GAMING;
-                break;
-            case "all":
-                ArrayList<Electronic> allItems = new ArrayList<>();
-                allItems.addAll(provideData("computer"));
-                allItems.addAll(provideData("mobile"));
-                allItems.addAll(provideData("camera"));
-                allItems.addAll(provideData("music"));
-                allItems.addAll(provideData("gaming"));
-                return allItems;
-        }
-
-        for (String[] d : data) {
-            Electronic item = new Electronic();
-            item.setName(d[0]);
-            item.setPrice(Float.parseFloat(d[1]));
-            ArrayList<Integer> images = new ArrayList<>();
-            String[] imagesIDs = d[2].split(" ");
-            for (String s : imagesIDs) {
-                int id = context.getResources().getIdentifier(s, "drawable", context.getPackageName());
-                images.add(id);
-            }
-            item.setImages(images);
-            item.setDescription(d[3]);
-            item.setElectronicType(type);
-
-            items.add(item);
-        }
-
-        return items;
-    }
-
 
 }
