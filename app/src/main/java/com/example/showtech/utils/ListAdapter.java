@@ -50,16 +50,16 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
             name.setText(item.getName());
             if (item.getElectronicType() == ElectronicType.UNKNOWN) {
                 imageView.setVisibility(View.GONE);
-                price.setText(R.string.no_result_message);
-                description.setVisibility(View.INVISIBLE);
+                price.setVisibility(View.GONE);
+                description.setText(R.string.suggestions);
             }
             else{
                 imageView.setImageResource(item.getImages()[0]);
                 String displayedPrice = "$ " + item.getPrice().toString();
                 price.setText(displayedPrice);
                 description.setText(item.getDescription());
+                price.setVisibility(View.VISIBLE);
                 imageView.setVisibility(View.VISIBLE);
-                description.setVisibility(View.VISIBLE);
             }
         }
     }

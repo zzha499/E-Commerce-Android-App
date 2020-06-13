@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,6 +69,7 @@ public class DetailsActivity extends AppCompatActivity implements BaseSliderView
         String price = "$ " + item.getPrice().toString();
         vh.price.setText(price);
         vh.description.setText(item.getDescription());
+        vh.description.setMovementMethod(new ScrollingMovementMethod());
 
     }
 

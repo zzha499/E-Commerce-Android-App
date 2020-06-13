@@ -14,5 +14,6 @@
     <string name="place_holder">PLACE HOLDER</string>
     <string name="MainActivity">MainActivity</string>
     <string name="search">Search</string>
-    <string name="no_result_message">Please search for another term.</string>
+    <string name="description_title">Description/Specifications:</string>
+    <string name="suggestions">- Make sure that all words are spelled correctly.\n- Try different keywords.\n- Try more general keywords.\n- Try fewer keywords.</string>
 </resources>
