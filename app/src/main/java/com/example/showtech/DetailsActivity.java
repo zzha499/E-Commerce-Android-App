@@ -14,6 +14,7 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 
+import java.text.DecimalFormat;
 import java.util.Objects;
 
 public class DetailsActivity extends AppCompatActivity implements BaseSliderView.OnSliderClickListener{
@@ -27,6 +28,7 @@ public class DetailsActivity extends AppCompatActivity implements BaseSliderView
 
     private Electronic item;
     private ViewHolder vh;
+    private static DecimalFormat df2 = new DecimalFormat("#.##");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +68,7 @@ public class DetailsActivity extends AppCompatActivity implements BaseSliderView
         vh.imageSlider.setDuration(4000);
 
         vh.name.setText(item.getName());
-        String price = "$ " + item.getPrice().toString();
+        String price = "$ " + df2.format(item.getPrice());
         vh.price.setText(price);
         vh.description.setText(item.getDescription());
         vh.description.setMovementMethod(new ScrollingMovementMethod());
