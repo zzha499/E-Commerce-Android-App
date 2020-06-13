@@ -40,11 +40,11 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/item_images"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:contentDescription="@string/item_images" />
+        <com.daimajia.slider.library.SliderLayout
+        android:id="@+id/slider"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        />
 
         <TextView
             android:id="@+id/name"
