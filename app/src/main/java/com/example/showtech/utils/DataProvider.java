@@ -77,24 +77,24 @@ public class DataProvider {
                         "Most powerful Surface laptop yet, with quad-core powered, 10th Gen Intel Core processors\n" +
                         "Fastest graphics on Surface, powered by NVIDIA® GTX GeForce GPU\n" +
                         "Power when you need it. Up to 15.5 hours1 battery life\n"},
-                {"Hp", "999", "hp_1 hp_2 hp_3", "\n15.6\" HD SVA BrightView micro-edge WLED-backlit display\n" +
+                {"HP Laptop", "999", "hp_1 hp_2 hp_3", "\n15.6\" HD SVA BrightView micro-edge WLED-backlit display\n" +
                         "AMD A9-9425 dual-core processor (1MB cache, 3.1GHz up to 3.7GHz)\n" +
                         "8GB RAM, 1TB Hard Drive\n"},
-                {"Lenovo", "1999", "lenovo_1 lenovo_2 lenovo_3", "\nLenovo Yoga C640 13.3\" 2-in-1 Laptop 13.3\" Full HD touchscreen\n" +
+                {"Lenovo Laptop", "1999", "lenovo_1 lenovo_2 lenovo_3", "\nLenovo Yoga C640 13.3\" 2-in-1 Laptop 13.3\" Full HD touchscreen\n" +
                         "Intel Core i5-10210U quad core processor (6MB cache, 1.6GHz up to 4.2GHz)\n" +
                         "8GB RAM, 256GB SSD\n"},
-                {"Acer", "3244", "acer_1 acer_2 acer_3", "\nAcer Predator Helios 300 Gaming Laptop: \n" +
+                {"Acer Predator", "3244", "acer_1 acer_2 acer_3", "\nAcer Predator Helios 300 Gaming Laptop: \n" +
                         "15.6\" Full HD display\n" +
                         "Intel Core i7-9750H hexa-core processor (12MB Smart Cache, 2.60GHz up to 4.50GHz)\n" +
                         "16GB RAM, 256GB SSD + 1TB HDD\n" +
                         "NVIDIA® GeForce® GTX 1660Ti graphics with 6GB memory\n"},
-                {"Asus", "1599", "asus_rog_1 asus_rog_2 asus_rog_3", "\nASUS ROG GX501VIK7700 Gaming Laptop:\n" +
+                {"Asus Gaming Laptop", "1599", "asus_rog_1 asus_rog_2 asus_rog_3", "\nASUS ROG GX501VIK7700 Gaming Laptop:\n" +
                         "CPU: Quad Core 2.8GHz up to 3.8GHz CPU clock.\n" +
                         "RAM: 16GB, 2400 MHz.\n" +
                         "Internal Storage: 1TB, DDR4-2400MHz.\n" +
                         "Display: 15.6 inch (1080 x 1920) FHD LED Display.\n"},
-                {"Dell", "3699", "xps_1 xps_2 xps_3", "\n17-inch laptop in a 15-inch size loaded with power. Featuring 10th Gen Intel® Core™ processors, up to NVIDIA® GeForce RTX™ 2060 graphics and a studio-quality display."},
-                {"MacBook Pro", "4999", "mbp_16_1 mbp_16_1 mbp_16_1", "\nApple MacBook Pro 16-inch 1TB: \n" +
+                {"Dell XPS 17", "3699", "xps_1 xps_2 xps_3", "\n17-inch laptop in a 15-inch size loaded with power. Featuring 10th Gen Intel® Core™ processors, up to NVIDIA® GeForce RTX™ 2060 graphics and a studio-quality display."},
+                {"MacBook Pro", "4999", "mbp_16_1 mbp_16_1 mbp_16_1", "Apple MacBook Pro 16-inch 1TB: \n" +
                         "Ninth-generation 8-core Intel Core i9 processor\n" +
                         "Stunning 16-inch Retina display with True Tone technology\n" +
                         "Touch Bar and Touch ID\n"},
@@ -185,9 +185,9 @@ public class DataProvider {
                         "Advanced wireless Bluetooth 5.0 technology\n" +
                         "Call and music management via three-button remote\n"},
                 {"Sonos Speaker", "1199", "sonos_subgen3_1 sonos_subgen3_2 sonos_subgen3_3", "\nSonos Sub Gen 3 (White):\n" +
-                        "Connect Sub to any Sonos system for a more immersive home theatre and music experienc\n" +
-                        "Enduring design continues to fit perfectly into any space\n" +
-                        "The wireless subwoofer for deep bass\n"},
+                        "Connect Sub to any Sonos system for a more immersive home theatre and music experience.\n" +
+                        "Enduring design continues to fit perfectly into any space.\n\n" +
+                        "A great wireless subwoofer for deep bass\n"},
                 {"Sony Headphone", "449", "sony_wh1000xm3_1 sony_wh1000xm3_2 sony_wh1000xm3_3", "\nSony WH-XB900N Extra Bass Wireless Noise Cancelling Over-Ear Headphones:\n" +
                         "Up to 30 hours battery life\n" +
                         "Voice control, including Amazon Alexa and Siri\n" +
