@@ -11,10 +11,10 @@ public class DataProvider {
 
     public static class electronicData {
         static String[][] computers = {
-                {"Alien", "100", "alien_computer", "The Alien gaming computer The Alien gaming computer The Alien gaming computer The Alien gaming computer The Alien gaming computer "},
-                {"Mac", "2000", "mac_computer", "The Mac computer"},
-                {"Hp", "2000", "hp_computer", "The Hp computer"},
-                {"Lenovo", "300", "lenovo_computer", "The Lenovo computer"},
+                {"Alienware M15", "2974", "alien_1 alien_2 alien_3", "The Alien gaming computer The Alien gaming computer The Alien gaming computer The Alien gaming computer The Alien gaming computer "},
+                {"Microsoft Surface Book", "3799", "surface_1 surface_2 surface_3", "The Mac computer"},
+                {"Hp", "999", "hp_1 hp_2 hp_3", "The Hp computer"},
+                {"Lenovo", "1999", "lenovo_1 lenovo_2 lenovo_3", "The Lenovo computer"},
                 {"Acer", "3244", "acer_1 acer_2 acer_3", "The Acer Predator computer"},
                 {"Asus", "1599", "asus_rog_1 asus_rog_2 asus_rog_3", "The Asus gaming computer"},
                 {"Dell", "3699", "xps_1 xps_2 xps_3", "The Dell XPS 17"},
