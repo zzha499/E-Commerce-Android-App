@@ -20,8 +20,10 @@ import java.util.Objects;
 
 public class SearchActivity extends AppCompatActivity  implements ListAdapter.ItemClickListener {
 
+    // Key for intent extras
     public static final String ITEM = "com.example.showtech.ITEM";
 
+    // ViewHolder for layouts
     static class ViewHolder {
         RecyclerView search_results;
         SearchView searchView;
@@ -39,6 +41,7 @@ public class SearchActivity extends AppCompatActivity  implements ListAdapter.It
         setContentView(R.layout.activity_search);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
+        // Assign each layout variable using layout ids
         vh = new SearchActivity.ViewHolder();
         vh.search_results = (RecyclerView) findViewById(R.id.search_results);
         vh.title = (TextView) findViewById(R.id.search_title);
@@ -46,22 +49,44 @@ public class SearchActivity extends AppCompatActivity  implements ListAdapter.It
         vh.title.setText(R.string.search);
         search(vh.searchView);
 
-
+        // Initialize the RecyclerView for the search results to be displayed
         vh.search_results.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         vh.search_results.setLayoutManager(layoutManager);
         vh.search_results.setItemAnimator(new DefaultItemAnimator());
 
+        // Get item from the static ListAdaptor and set up new ListAdaptor
         items = ListAdapter.getItems();
         adapter = new ListAdapter(items);
         adapter.setClickListener(this);
         vh.search_results.setAdapter(adapter);
 
+        // opens keyboard automatically
         vh.searchView.setIconified(false);
     }
 
-    private void search(SearchView searchView) {
+    /**
+     * This method is called when the user clicks on a item in the list
+     * A new DetailsActivity is started using a new intent with the item object as serializable extra
+     * @param view The CardView(Item) user clicks on
+     * @param position The position of the CardView(Item) in the RecyclerView
+     */
+    @Override
+    public void onItemClick(View view, int position) {
+        Electronic item = adapter.getItem(position);
+        item.addView();
+        MainActivity.getAdapter().sort();
+        Toast.makeText(view.getContext(), item.getName(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, DetailsActivity.class);
+        intent.putExtra(ITEM, item);
+        startActivity(intent);
+    }
 
+    /**
+     * This method is used to setup the SearchView
+     * @param searchView The SearchView to be setup
+     */
+    private void search(SearchView searchView) {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -75,17 +100,7 @@ public class SearchActivity extends AppCompatActivity  implements ListAdapter.It
         });
     }
 
-    @Override
-    public void onItemClick(View view, int position) {
-        Electronic item = adapter.getItem(position);
-        item.addView();
-        MainActivity.getAdapter().sort();
-        Toast.makeText(view.getContext(), item.getName(), Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, DetailsActivity.class);
-        intent.putExtra(ITEM, item);
-        startActivity(intent);
-    }
-
+    // This method is overridden to make sure the Top Picks section on the main screen updates itself
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)
     {
@@ -97,6 +112,11 @@ public class SearchActivity extends AppCompatActivity  implements ListAdapter.It
         return super.onKeyDown(keyCode, event);
     }
 
+    /**
+     * This method is called when the user clicks on the back button
+     * Ends the current activity and return to the previous activity
+     * @param view The Back button
+     */
     public void back(View view) {
         MainActivity.getAdapter().sort();
         finish();

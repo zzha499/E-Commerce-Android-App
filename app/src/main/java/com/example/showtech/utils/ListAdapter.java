@@ -14,11 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.showtech.R;
 import com.example.showtech.Electronic;
 
-import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> implements Filterable, Serializable {
+/**
+ * A ListAdaptor is created for each RecyclerView in the app
+ * The List adapter is responsible for managing/searching the items in the RecyclerView
+ */
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> implements Filterable {
 
 
     private static ArrayList<Electronic> items;
@@ -28,7 +31,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
     private boolean topPicks;
     private static DecimalFormat df2 = new DecimalFormat("#.##");
 
-
+    // ViewHolder for layouts
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView imageView;
         TextView name;
@@ -45,11 +48,16 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
             itemView.setOnClickListener(this);
         }
 
+        // Setting the itemClickListener for the RecyclerView
         @Override
         public void onClick(View view) {
             if (itemClickListener != null) itemClickListener.onItemClick(view, getAdapterPosition());
         }
 
+        /**
+         * Bing the displayed items in a recyclerView with Electronic objects
+         * @param item The Electronic object to be bind
+         */
         void bind(Electronic item) {
             name.setText(item.getName());
             if (item.getElectronicType() == ElectronicType.UNKNOWN) {
@@ -70,7 +78,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         }
     }
 
+    // ListAdapter constructor
     public ListAdapter(ArrayList<Electronic> items) {
+        // Setting up new comparator for sorting
         itemComparator = new ItemComparator();
         ListAdapter.items = items;
         this.filteredItems = items;
@@ -78,6 +88,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         this.filteredItems.sort(itemComparator);
     }
 
+    /**
+     * This method creates a new ViewHolder based on the chosen layout (Top Picks or Item List)
+     * @param parent The parent ViewGroup
+     * @param viewType The viewType
+     * @return The ViewHolder created
+     */
     @NonNull
     @Override
     public ListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -94,6 +110,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         return new MyViewHolder(view);
     }
 
+    /**
+     * This method binds the ViewHolder with a Electronic object in the filteredList
+     * @param holder The ViewHolder to be bind
+     * @param position The position of the Electronic object in the filteredList
+     */
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.bind(filteredItems.get(position));
@@ -101,6 +122,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
 
     @Override
     public int getItemCount() {
+        // Restrict Top Picks section to only display 5 items
         if (topPicks) {
             return 5;
         }
@@ -121,6 +143,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         void onItemClick(View view, int position);
     }
 
+    /**
+     * This method is overridden to define the filter for the RecyclerView
+     * @return The created filter
+     */
     @Override
     public Filter getFilter() {
         return new Filter() {
@@ -133,12 +159,16 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
                 else {
                     String[] charStrings = charString.split(" ");
                     ArrayList<Electronic> filteredList = new ArrayList<>();
+
+                    // Filter by category first
                     for (Electronic item : items) {
                         if (!charString.contains("category:") && (charString.toLowerCase().contains(item.getElectronicType().name().toLowerCase()) ||
                                 item.getElectronicType().name().toLowerCase().contains(charString.toLowerCase()))) {
                             filteredList.add(item);
                         }
                     }
+
+                    // Filter by item name/description second
                     for (Electronic item : items) {
                         if (containTerms(item, charStrings)) {
                             if (!filteredList.contains(item)) {
@@ -146,6 +176,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
                             }
                         }
                     }
+
+                    // Added dummy item for no result message if no items are added
                     if (filteredList.isEmpty()) {
                         filteredList.add(new Electronic(ElectronicType.UNKNOWN));
                     }
@@ -158,7 +190,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                 filteredItems = (ArrayList<Electronic>) filterResults.values;
-
                 notifyDataSetChanged();
             }
         };
@@ -168,14 +199,24 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         return items;
     }
 
+    /**
+     * Sort the list of Electronics in the RecyclerView using the custom comparator
+     */
     public void sort() {
         items.sort(itemComparator);
         filteredItems.sort(itemComparator);
         notifyDataSetChanged();
     }
 
+    /**
+     * Determine if an Electronic object contain a term
+     * @param item The Electronic object
+     * @param terms The term to search for
+     * @return True if the Electronic does contain the term otherwise false
+     */
     private boolean containTerms(Electronic item, String[] terms) {
         for (String term : terms) {
+            // compare the category of the electronic first
             if (term.contains("category:")) {
                 if (term.split(":").length > 1) {
                     String category = term.split(":")[1];

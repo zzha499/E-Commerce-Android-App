@@ -19,6 +19,11 @@ public class Electronic implements Serializable {
     private int[] images;
     private int views;
 
+    /**
+     * The model for the electronic devices in the application
+     * A new Electronic object is created for each product in the app
+     * The information of the product is stored in the object
+     */
     public Electronic() {
         specification = "";
         views = ThreadLocalRandom.current().nextInt(0, 5);

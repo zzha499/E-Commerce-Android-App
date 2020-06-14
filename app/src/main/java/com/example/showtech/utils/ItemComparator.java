@@ -4,6 +4,9 @@ import com.example.showtech.Electronic;
 
 import java.util.Comparator;
 
+/**
+ * A custom comparator to sort Electronics by view count
+ */
 public class ItemComparator implements Comparator<Electronic> {
 
     @Override

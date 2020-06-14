@@ -5,16 +5,22 @@ import com.example.showtech.Electronic;
 
 import java.util.ArrayList;
 
+/**
+ * This class stores/provides the data for the application
+ */
 public class DataProvider {
 
     private Context context;
-
 
     public DataProvider(Context context){
         this.context = context;
     }
 
-
+    /**
+     * Provide the data to a Activity
+     * @param category The category to provide the data
+     * @return The list of Electronic objects created
+     */
     public ArrayList<Electronic> provideData(String category){
         ArrayList<Electronic> items = new ArrayList<>();
         String[][] data = {};
@@ -70,6 +76,9 @@ public class DataProvider {
         return items;
     }
 
+    /**
+     * The Electronic Name, Price, Images, and Descriptions
+     */
     public static class electronicData {
         static String[][] computers = {
                 {"Alienware M15", "2974", "alien_1 alien_2 alien_3", "\nALIENWARE M15 R3 GAMING LAPTOP: Alienware’s most thin and powerful 15\" laptop ever. Now with the option for up to 10th gen Intel Core i9k processors with up to 12-phase Hyper Efficient Voltage regulation."},
