@@ -158,6 +158,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                 filteredItems = (ArrayList<Electronic>) filterResults.values;
+
                 notifyDataSetChanged();
             }
         };

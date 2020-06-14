@@ -93,7 +93,8 @@
             android:layout_marginVertical="5dp"
             android:background="@color/Grey"
             android:orientation="vertical"
-            android:padding="15dp">
+            android:padding="15dp"
+            android:scrollbars="vertical">
 
             <LinearLayout
                 android:id="@+id/computer"
