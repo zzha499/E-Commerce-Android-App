@@ -80,7 +80,6 @@ public class SearchActivity extends AppCompatActivity  implements ListAdapter.It
         Electronic item = adapter.getItem(position);
         item.addView();
         MainActivity.getAdapter().sort();
-        adapter.sort();
         Toast.makeText(view.getContext(), item.getName(), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, DetailsActivity.class);
         intent.putExtra(ITEM, item);
@@ -99,6 +98,7 @@ public class SearchActivity extends AppCompatActivity  implements ListAdapter.It
     }
 
     public void back(View view) {
+        MainActivity.getAdapter().sort();
         finish();
     }
 

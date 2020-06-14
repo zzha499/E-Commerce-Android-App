@@ -25,7 +25,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
     private ArrayList<Electronic> filteredItems;
     private ItemClickListener itemClickListener;
     private ItemComparator itemComparator;
-    private boolean topSellingList;
+    private boolean topPicks;
     private static DecimalFormat df2 = new DecimalFormat("#.##");
 
 
@@ -34,12 +34,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         TextView name;
         TextView price;
         TextView description;
+        View itemView;
         MyViewHolder(View itemView) {
             super(itemView);
             this.imageView = (ImageView) itemView.findViewById(R.id.imageView);
             this.name = (TextView) itemView.findViewById(R.id.name);
             this.price = (TextView) itemView.findViewById(R.id.price);
             this.description = (TextView) itemView.findViewById(R.id.description);
+            this.itemView = itemView;
             itemView.setOnClickListener(this);
         }
 
@@ -51,11 +53,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         void bind(Electronic item) {
             name.setText(item.getName());
             if (item.getElectronicType() == ElectronicType.UNKNOWN) {
+                itemView.setClickable(false);
                 imageView.setVisibility(View.GONE);
                 price.setVisibility(View.GONE);
                 description.setText(R.string.suggestions);
             }
             else{
+                itemView.setClickable(true);
                 imageView.setImageResource(item.getImages()[0]);
                 String displayedPrice = "$" + df2.format(item.getPrice());
                 price.setText(displayedPrice);
@@ -79,7 +83,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
     public ListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
         if (parent.getContentDescription().equals("Top Picks")) {
-            topSellingList = true;
+            topPicks = true;
             view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.top_selling_items, parent, false);
         }
@@ -97,7 +101,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
 
     @Override
     public int getItemCount() {
-        if (topSellingList) {
+        if (topPicks) {
             return 5;
         }
         else {
@@ -130,14 +134,16 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
                     String[] charStrings = charString.split(" ");
                     ArrayList<Electronic> filteredList = new ArrayList<>();
                     for (Electronic item : items) {
-                        if (charString.toLowerCase().contains(item.getElectronicType().name().toLowerCase()) ||
-                                item.getElectronicType().name().toLowerCase().contains(charString.toLowerCase())) {
+                        if (!charString.contains("category:") && (charString.toLowerCase().contains(item.getElectronicType().name().toLowerCase()) ||
+                                item.getElectronicType().name().toLowerCase().contains(charString.toLowerCase()))) {
                             filteredList.add(item);
                         }
                     }
                     for (Electronic item : items) {
                         if (containTerms(item, charStrings)) {
-                            filteredList.add(item);
+                            if (!filteredList.contains(item)) {
+                                filteredList.add(item);
+                            }
                         }
                     }
                     if (filteredList.isEmpty()) {

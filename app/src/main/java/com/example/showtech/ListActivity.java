@@ -104,6 +104,7 @@ public class ListActivity extends AppCompatActivity  implements ListAdapter.Item
     }
 
     public void back(View view) {
+        MainActivity.getAdapter().sort();
         finish();
     }
 
